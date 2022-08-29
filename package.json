@@ -1,0 +1,19 @@
+{
+  "name": "applifting-exercise-viet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangviet97/applifting-blog-exercise.git"
+  },
+  "author": "Hoang Viet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoangviet97/applifting-blog-exercise/issues"
+  },
+  "homepage": "https://github.com/hoangviet97/applifting-blog-exercise#readme"
+}
