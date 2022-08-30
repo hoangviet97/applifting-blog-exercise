@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -16,6 +17,18 @@ module.exports = {
             loader: "babel-loader"
           }
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: "asset/resource"
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: "asset/inline"
       }
     ]
   },
@@ -24,9 +37,10 @@ module.exports = {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js"
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "..", "./src/index.html")
-    })
-  ]
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, "..", "./src/index.html") }), new ReactRefreshWebpackPlugin()],
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    open: true
+  }
 };
