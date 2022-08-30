@@ -1,8 +1,16 @@
 .nav {
   display: flex;
 
+  &__icon {
+    margin-right: 15px;
+  }
+
   &__list {
     display: flex;
     align-items: center;
+  }
+
+  &__item {
+    margin-right: 15px;
   }
 }

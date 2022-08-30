@@ -5,13 +5,21 @@ import Logo from "../../logo.png";
 const Navigation = () => {
   return (
     <div className="nav">
-      <img src={Logo} alt="logo" width={39} height={44} />
+      <div className="nav__icon">
+        <Link to="/">
+          <img src={Logo} alt="logo" width={39} height={44} />
+        </Link>
+      </div>
       <ul className="nav__list">
-        <li>
-          <Link to="/recent">Recent Articles</Link>
+        <li className="nav__item">
+          <Link to="/recent-articles" className="nav__link">
+            Recent Articles
+          </Link>
         </li>
-        <li>
-          <Link to="">About </Link>
+        <li className="nav__item">
+          <Link to="" className="nav__link">
+            About
+          </Link>
         </li>
       </ul>
     </div>
