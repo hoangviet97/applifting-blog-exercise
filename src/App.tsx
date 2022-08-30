@@ -1,11 +1,16 @@
 import React from "react";
 import "./styles/main.scss";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/header/Header";
+import Login from "./pages/login/Login";
 
 const App = () => {
   return (
     <div className="app">
-      <h1>Helo@</h1>
-      <h2>dot.com</h2>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
     </div>
   );
 };
