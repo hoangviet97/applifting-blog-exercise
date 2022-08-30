@@ -1,7 +1,7 @@
 import React from "react";
 
 const HeaderAuth = () => {
-  return <div>Login</div>;
+  return <div>Log In</div>;
 };
 
 export default HeaderAuth;
