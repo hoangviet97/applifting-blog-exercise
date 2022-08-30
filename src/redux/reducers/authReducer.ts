@@ -1,3 +1,5 @@
+import { LOGIN } from "../actions/types";
+
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
@@ -9,6 +11,11 @@ function authReducer(state = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {
+    case LOGIN:
+      return {
+        ...state,
+        isAuthenticated: true
+      };
     default:
       return state;
   }

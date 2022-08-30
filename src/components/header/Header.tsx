@@ -1,12 +1,14 @@
 import React from "react";
-import Navigation from "../navigation/Navigation";
+import PublicNavigation from "../navigation/PublicNavigation";
 import HeaderAuth from "./HeaderAuth";
 
 const Header = () => {
   return (
-    <div className="header container">
-      <Navigation />
-      <HeaderAuth />
+    <div className="header">
+      <div className="header__content container">
+        <PublicNavigation />
+        <HeaderAuth />
+      </div>
     </div>
   );
 };

@@ -2,13 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/authActions";
 import { Form, Input, Button } from "antd";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch<any>();
+  const navigate: NavigateFunction = useNavigate();
 
   const onFinishHandler = (values: any) => {
     const { username, password } = values;
-    dispatch(login(username, password));
+    dispatch(login(username, password, navigate));
   };
 
   return (
