@@ -1,9 +1,15 @@
 import { Dispatch } from "redux";
-import { LOGIN, LOGOUT } from "./types";
+import axiosClient from "../../helpers/axios";
+import { LOGIN, LOGIN_FAIL, LOGOUT } from "./types";
 
-export const login = () => (dispatch: Dispatch) => {
+export const login = (username: string, password: string) => async (dispatch: any) => {
   try {
-  } catch (error) {}
+    const res = await axiosClient.post("/login", { username, password });
+    console.log(res);
+    //dispatch({ type: LOGIN });
+  } catch (error) {
+    dispatch({ type: LOGIN_FAIL });
+  }
 };
 
 export const logout = (dispatch: Dispatch) => {

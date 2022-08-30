@@ -1,9 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/authActions";
 import { Form, Input, Button } from "antd";
 
 const Login = () => {
+  const dispatch = useDispatch<any>();
+
   const onFinishHandler = (values: any) => {
-    console.log(values);
+    const { username, password } = values;
+    dispatch(login(username, password));
   };
 
   return (
