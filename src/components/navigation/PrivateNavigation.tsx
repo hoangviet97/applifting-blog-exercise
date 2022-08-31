@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Avatar } from "antd";
 
-const PrivateNavigation = () => {
+const PrivateNavigation: React.FunctionComponent = () => {
   return (
     <div className="nav">
       <ul className="nav__list">
@@ -12,7 +12,7 @@ const PrivateNavigation = () => {
           </Link>
         </li>
         <li className="nav__item">
-          <Link to="" className="nav__link">
+          <Link to="/new-article" className="nav__link">
             Create Article
           </Link>
         </li>

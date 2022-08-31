@@ -14,7 +14,8 @@ function authReducer(state = initialState, action: any) {
     case LOGIN:
       return {
         ...state,
-        isAuthenticated: true
+        isAuthenticated: true,
+        token: localStorage.setItem("token", payload)
       };
     default:
       return state;

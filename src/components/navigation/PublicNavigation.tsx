@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../logo.png";
 
-const Navigation = () => {
+const PublicNavigation: React.FunctionComponent = () => {
   return (
     <div className="nav">
       <div className="nav__icon">
@@ -26,4 +26,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default PublicNavigation;

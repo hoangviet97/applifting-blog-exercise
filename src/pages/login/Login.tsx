@@ -4,7 +4,7 @@ import { login } from "../../redux/actions/authActions";
 import { Form, Input, Button } from "antd";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 
-const Login = () => {
+const Login: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const navigate: NavigateFunction = useNavigate();
 
