@@ -14,7 +14,6 @@ const CreateArticlePage = () => {
   const [fileCheck, setFileCheck] = useState<any>(null);
 
   const { TextArea } = Input;
-  const { TabPane } = Tabs;
 
   const onSubmitFormHandle = (values: any) => {
     console.log(fileCheck);
@@ -42,13 +41,16 @@ const CreateArticlePage = () => {
           <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
             <Input />
           </Form.Item>
-          <Form.Item>
+          <Form.Item label="Image" rules={[{ required: true, message: "Please input perex text!" }]}>
             <Upload listType="picture" beforeUpload={() => false} className="upload-list-inline" maxCount={1} onChange={onUploadImage}>
               <Button>Upload image</Button>
             </Upload>
           </Form.Item>
+          <Form.Item label="Perex" name="perex" rules={[{ required: true, message: "Please input perex text!" }]}>
+            <TextArea autoSize={{ minRows: 4, maxRows: 4 }} autoComplete="false" />
+          </Form.Item>
           <Form.Item label="Content" name="content" rules={[{ required: true, message: "Please input content!" }]}>
-            <TextArea rows={15} onChange={(e) => setContent(e.target.value)} autoComplete="false" placeholder="Supports markdown. Yay!" />
+            <TextArea autoSize={{ minRows: 15, maxRows: 25 }} onChange={(e) => setContent(e.target.value)} autoComplete="false" placeholder="Supports markdown. Yay!" />
           </Form.Item>
         </Form>
         <Markdown>{content}</Markdown>

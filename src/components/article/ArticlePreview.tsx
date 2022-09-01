@@ -36,6 +36,7 @@ const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {
           <div className="article-detail__author">{user}</div>
           <div className="article-detail__date">{article.createdAt}</div>
         </div>
+        <div>{article.perex}</div>
         <Link to={`${article.articleId}`}>Read whole article</Link>
       </div>
     </div>
