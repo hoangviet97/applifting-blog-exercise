@@ -29,6 +29,8 @@ export const loadUser = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const logout = (dispatch: Dispatch) => {
-  dispatch({ type: LOGOUT });
+export const logout = () => {
+  return {
+    type: LOGOUT
+  };
 };

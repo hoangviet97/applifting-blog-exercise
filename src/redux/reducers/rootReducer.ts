@@ -5,10 +5,6 @@ import articleReducer from "./articleReducer";
 const appReducer = combineReducers({ authReducer, articleReducer });
 
 const rootReducer = (state: any, action: any) => {
-  if (action.type === "LOGOUT") {
-    return appReducer(undefined, action);
-  }
-
   return appReducer(state, action);
 };
 

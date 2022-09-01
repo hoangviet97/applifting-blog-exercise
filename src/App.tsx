@@ -6,10 +6,12 @@ import Login from "./pages/login/Login";
 import Recent from "./pages/recent/Recent";
 import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
 import ArticleDetail from "./pages/ArticleDetail/ArticleDetail";
+import MyArticles from "./pages/myArticles/MyArticles";
 import setAuthToken from "./helpers/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { loadUser } from "./redux/actions/authActions";
+import ProtectedRoute from "./routing/ProtectedRoute";
 
 const App = () => {
   useEffect(() => {
@@ -26,8 +28,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="articles" element={<Recent />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="my-articles" element={<MyArticles />} />
+            <Route path="new-article" element={<CreateArticlePage />} />
+          </Route>
           <Route path="articles/:articleId" element={<ArticleDetail />} />
-          <Route path="/new-article" element={<CreateArticlePage />} />
         </Routes>
       </Provider>
     </div>

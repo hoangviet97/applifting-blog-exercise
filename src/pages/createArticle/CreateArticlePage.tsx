@@ -38,8 +38,7 @@ const CreateArticlePage = () => {
             <Input />
           </Form.Item>
           <Form.Item rules={[{ required: true, message: "Please select image" }]}>
-            <input type="file" name="file" accept="image/*" onChange={(e) => onUploadImage(e)} />
-            <Upload listType="picture" beforeUpload={() => false} className="upload-list-inline" onChange={onUploadImage}>
+            <Upload listType="picture" beforeUpload={() => false} className="upload-list-inline" maxCount={1} onChange={onUploadImage}>
               <Button>Upload image</Button>
             </Upload>
           </Form.Item>
