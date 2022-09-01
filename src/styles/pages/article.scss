@@ -1,4 +1,37 @@
 .article {
+  &-preview {
+    margin-bottom: 32px;
+    display: flex;
+
+    &__info {
+      display: flex;
+    }
+
+    &__icon {
+      font-size: 60px;
+      color: $normal-grey;
+    }
+
+    &__image {
+      width: 272px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    &__content {
+      padding-left: 15px;
+    }
+
+    &__skeleton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-grey;
+      width: 272px;
+      height: 250px;
+    }
+  }
+
   &-detail {
     display: grid;
     grid-auto-columns: 1fr;
@@ -23,6 +56,10 @@
       &-container {
         padding-left: 30px;
         border-left: 1px solid grey;
+      }
+
+      &-list {
+        margin-top: 20px;
       }
     }
 

@@ -53,7 +53,7 @@ const ArticleDetail = () => {
       <div className="article-detail__related right-area">
         <div className="article-detail__related-container">
           <h3>Related articles</h3>
-          <div>
+          <div className="article-detail__related-list">
             {articles
               .filter((i: any) => i.articleId !== article.articleId)
               .map((article: any) => (
