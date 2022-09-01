@@ -8,7 +8,7 @@ export const login = (username: string, password: string, navigate: NavigateFunc
   try {
     const res = await axiosClient.post("/login", { username, password });
     dispatch({ type: LOGIN, payload: res.data.access_token });
-    navigate("/recent-articles");
+    navigate("/articles");
     console.log(res);
   } catch (error: any) {
     message.error(error.response.data.message);

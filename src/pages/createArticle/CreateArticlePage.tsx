@@ -1,23 +1,25 @@
-import React from "react";
-import { Button, Form, Input, Upload } from "antd";
+import React, { useState } from "react";
+import { Button, Form, Input, Tabs, message, Upload } from "antd";
+import Markdown from "markdown-to-jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadArticleImage, createArticle } from "../../redux/actions/articleActions";
+import { SegmentedValue } from "antd/lib/segmented";
 
 const CreateArticlePage = () => {
   const dispatch = useDispatch<any>();
-  const imageId = useSelector((state: any) => state.articleReducer.uploadedImage);
-  let formdata = new FormData();
+  let formData = new FormData();
+  const [content, setContent] = useState<string>("");
 
   const { TextArea } = Input;
-
-  const onUploadImage = async (e: any) => {
-    formdata.append("image", e.target.files[0]);
-
-    //dispatch(uploadArticleImage(formdata));
-  };
+  const { TabPane } = Tabs;
 
   const onSubmitFormHandle = (values: any) => {
-    dispatch(createArticle(values, formdata));
+    dispatch(createArticle(values, formData));
+  };
+
+  const onUploadImage = (e: any) => {
+    console.log(e.file.name);
+    formData.append("image", e.file);
   };
 
   return (
@@ -26,7 +28,7 @@ const CreateArticlePage = () => {
         <h1>Create new article</h1>
       </header>
       <div className="article-operation__body">
-        <Form onFinish={onSubmitFormHandle}>
+        <Form onFinish={onSubmitFormHandle} layout="vertical">
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Publish Article
@@ -35,13 +37,17 @@ const CreateArticlePage = () => {
           <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
             <Input />
           </Form.Item>
-          <Form.Item>
-            <input type="file" name="file" onChange={(e) => onUploadImage(e)} />
+          <Form.Item rules={[{ required: true, message: "Please select image" }]}>
+            <input type="file" name="file" accept="image/*" onChange={(e) => onUploadImage(e)} />
+            <Upload listType="picture" beforeUpload={() => false} className="upload-list-inline" onChange={onUploadImage}>
+              <Button>Upload image</Button>
+            </Upload>
           </Form.Item>
           <Form.Item label="Content" name="content" rules={[{ required: true, message: "Please input content!" }]}>
-            <TextArea rows={15} placeholder="Supports markdown. Yay!" />
+            <TextArea rows={15} onChange={(e) => setContent(e.target.value)} placeholder="Supports markdown. Yay!" />
           </Form.Item>
         </Form>
+        <Markdown>{content}</Markdown>
       </div>
     </div>
   );

@@ -5,11 +5,17 @@ import Header from "./components/header/Header";
 import Login from "./pages/login/Login";
 import Recent from "./pages/recent/Recent";
 import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
+import ArticleDetail from "./pages/ArticleDetail/ArticleDetail";
+import setAuthToken from "./helpers/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
 const App = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setAuthToken(localStorage.token);
+    }
+  }, []);
 
   return (
     <div className="app">
@@ -17,7 +23,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/recent-articles" element={<Recent />} />
+          <Route path="articles" element={<Recent />} />
+          <Route path="articles/:articleId" element={<ArticleDetail />} />
           <Route path="/new-article" element={<CreateArticlePage />} />
         </Routes>
       </Provider>

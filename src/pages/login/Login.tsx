@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/authActions";
 import { Form, Input, Button } from "antd";
@@ -7,6 +7,8 @@ import { useNavigate, NavigateFunction } from "react-router-dom";
 const Login: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const navigate: NavigateFunction = useNavigate();
+
+  useEffect(() => {}, []);
 
   const onFinishHandler = (values: any) => {
     const { username, password } = values;

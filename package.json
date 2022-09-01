@@ -23,6 +23,8 @@
     "@types/redux": "^3.6.0",
     "antd": "^4.22.8",
     "axios": "^0.27.2",
+    "markdown-to-jsx": "^7.1.7",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.3",

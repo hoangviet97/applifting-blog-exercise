@@ -12,7 +12,7 @@ const PublicNavigation: React.FunctionComponent = () => {
       </div>
       <ul className="nav__list">
         <li className="nav__item">
-          <Link to="/recent-articles" className="nav__link">
+          <Link to="/articles" className="nav__link">
             Recent Articles
           </Link>
         </li>

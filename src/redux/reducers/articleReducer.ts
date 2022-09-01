@@ -1,7 +1,8 @@
-import { GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE } from "../actions/types";
+import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE } from "../actions/types";
 
 const initialState = {
   articles: [],
+  article: {},
   uploadedImage: "",
   images: [],
   loading: false
@@ -15,6 +16,12 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         articles: payload,
+        loading: false
+      };
+    case GET_ARTICLE:
+      return {
+        ...state,
+        article: payload,
         loading: false
       };
     case UPLOAD_IMAGE:

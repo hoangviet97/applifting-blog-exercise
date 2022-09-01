@@ -1,0 +1,11 @@
+.article {
+  &-detail {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+    &__related {
+      border-left: 1px solid grey;
+      padding: 0 49px;
+    }
+  }
+}
