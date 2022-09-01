@@ -1,11 +1,7 @@
 import axiosClient from "./axios";
 
 const setAuthToken = (token: string) => {
-  if (token) {
-    axiosClient.defaults.headers.common["Authorization"] = token;
-  } else {
-    delete axiosClient.defaults.headers.common["Authorization"];
-  }
+  axiosClient.defaults.headers.common["Authorization"] = "f8dcc194-0ee1-4b49-b41c-6248cefed3d1";
 };
 
 export default setAuthToken;
