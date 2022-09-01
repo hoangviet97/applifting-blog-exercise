@@ -1,5 +1,6 @@
 export const LOGIN: string = "LOGIN";
 export const LOGIN_FAIL: string = "LOGIN_FAIL";
+export const LOAD_USER: string = "LOAD_USER";
 export const LOGOUT: string = "LOGOUT";
 
 export const CREATE_ARTICLE: string = "CREATE_ARTICLE";

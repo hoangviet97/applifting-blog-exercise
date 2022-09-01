@@ -9,11 +9,13 @@ import ArticleDetail from "./pages/ArticleDetail/ArticleDetail";
 import setAuthToken from "./helpers/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { loadUser } from "./redux/actions/authActions";
 
 const App = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setAuthToken(localStorage.token);
+      store.dispatch(loadUser());
     }
   }, []);
 

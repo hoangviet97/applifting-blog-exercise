@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Avatar } from "antd";
 
 const PrivateNavigation: React.FunctionComponent = () => {
+  const user = useSelector((state: any) => state.authReducer.user);
   return (
     <div className="nav">
       <ul className="nav__list">
@@ -18,7 +20,7 @@ const PrivateNavigation: React.FunctionComponent = () => {
         </li>
       </ul>
       <Avatar shape="circle" style={{ backgroundColor: "#87d068" }}>
-        b
+        {user[0]}
       </Avatar>
     </div>
   );
