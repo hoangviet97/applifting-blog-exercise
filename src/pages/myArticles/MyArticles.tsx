@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Table, Space } from "antd";
-import { getArticles } from "../../redux/actions/articleActions";
+import { getArticles, deleteArticle } from "../../redux/actions/articleActions";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
@@ -23,8 +23,13 @@ const MyArticles = () => {
     setEditedArticles(ogArticles);
   }, [articles]);
 
+  const onDeleteArticleHandle = (id: string) => {
+    dispatch(deleteArticle(id));
+  };
+
   interface DataType {
     key: React.Key;
+    articleId: string;
     title: string;
     perex: string;
     author: string;
@@ -54,10 +59,10 @@ const MyArticles = () => {
       dataIndex: "",
       render: (_, record) => (
         <Space size="middle">
-          <a>
+          <Link to={`${record.articleId}`}>
             <EditOutlined />
-          </a>
-          <a>
+          </Link>
+          <a onClick={() => onDeleteArticleHandle(record.articleId)}>
             <DeleteOutlined />
           </a>
         </Space>

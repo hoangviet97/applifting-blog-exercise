@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Params } from "react-router-dom";
 import { getArticle, getArticles } from "../../redux/actions/articleActions";
 import moment from "moment";
-import { Avatar, Comment, Tooltip } from "antd";
+import { Avatar, Comment, Tooltip, Skeleton } from "antd";
 import axiosClient from "../../helpers/axios";
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
+import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleton";
 
 const ArticleDetail = () => {
   const dispatch = useDispatch<any>();
@@ -26,7 +27,7 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     dispatch(getArticle(params.articleId));
-    articles.length > 0 && dispatch(getArticles());
+    dispatch(getArticles());
   }, []);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const ArticleDetail = () => {
   return (
     <div className="article-detail container container__content">
       {isLoading ? (
-        "loading..."
+        <Skeleton paragraph={{ rows: 10 }} />
       ) : (
         <div className="article-detail__content left-area">
           <h1>{article.title}</h1>
@@ -44,7 +45,7 @@ const ArticleDetail = () => {
             <div className="article-detail__author">{user}</div>
             <div className="article-detail__date">{article.createdAt}</div>
           </div>
-          <div className="article-detail__image-box">{article && <img className="article-detail__image" src={img} alt="image" />}</div>
+          <div className="article-detail__image-box">{<img className="article-detail__image" src={img} alt="image" />}</div>
           <div className="article-detail__text">
             <ReactMarkdown>{article && article.content}</ReactMarkdown>
           </div>

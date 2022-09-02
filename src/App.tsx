@@ -7,6 +7,7 @@ import Recent from "./pages/recent/Recent";
 import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
 import ArticleDetail from "./pages/ArticleDetail/ArticleDetail";
 import MyArticles from "./pages/myArticles/MyArticles";
+import ArticleEdit from "./pages/articleEdit/ArticleEdit";
 import NotFound from "./pages/404/NotFound";
 import setAuthToken from "./helpers/setAuthToken";
 import { Provider } from "react-redux";
@@ -30,10 +31,30 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="articles" element={<Recent />}></Route>
           <Route path="articles/:articleId" element={<ArticleDetail />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="my-articles" element={<MyArticles />} />
-            <Route path="new-article" element={<CreateArticlePage />} />
-          </Route>
+          <Route
+            path="my-articles"
+            element={
+              <ProtectedRoute>
+                <MyArticles />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="my-articles/:articleId"
+            element={
+              <ProtectedRoute>
+                <ArticleEdit />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="new-article"
+            element={
+              <ProtectedRoute>
+                <CreateArticlePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Provider>

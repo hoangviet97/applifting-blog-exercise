@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { LOGIN, LOGIN_FAIL, LOGOUT, LOAD_USER } from "./types";
+import { LOGIN, LOGIN_FAIL, LOGOUT, LOAD_USER, USER_LOADING } from "./types";
 import { message } from "antd";
 import { NavigateFunction } from "react-router-dom";
 
@@ -18,6 +18,7 @@ export const login = (username: string, password: string, navigate: NavigateFunc
 
 export const loadUser = () => async (dispatch: Dispatch) => {
   try {
+    dispatch(loading());
     const res = await axiosClient.get(`/tenants/38ab5ddd-a9dc-454f-b62c-9fac7f223edc`);
     dispatch({ type: LOAD_USER, payload: res.data });
 
@@ -27,6 +28,12 @@ export const loadUser = () => async (dispatch: Dispatch) => {
     message.error(error.response.data.message);
     dispatch({ type: LOGIN_FAIL });
   }
+};
+
+export const loading = () => {
+  return {
+    type: USER_LOADING
+  };
 };
 
 export const logout = () => {

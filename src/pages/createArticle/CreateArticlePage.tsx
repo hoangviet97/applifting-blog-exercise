@@ -9,20 +9,19 @@ import Markdown from "markdown-to-jsx";
 
 const CreateArticlePage = () => {
   const dispatch = useDispatch<any>();
-  let formData = new FormData();
+  const [form] = Form.useForm();
+  const formData = new FormData();
   const [content, setContent] = useState<string>("");
-  const [fileCheck, setFileCheck] = useState<any>(null);
+  const [fileCheck, setFileCheck] = useState<any>(0);
+  const [check, setCheck] = useState<any>([]);
 
   const { TextArea } = Input;
 
   const onSubmitFormHandle = (values: any) => {
-    console.log(fileCheck);
-    const splitText = content.split(/<br ?\/?>/, 2);
     dispatch(createArticle(values, formData));
   };
 
   const onUploadImage = (e: any) => {
-    console.log(e.file);
     formData.append("image", e.file);
   };
 
@@ -32,7 +31,7 @@ const CreateArticlePage = () => {
         <h1>Create new article</h1>
       </header>
       <div className="article-operation__body">
-        <Form onFinish={onSubmitFormHandle} layout="vertical">
+        <Form form={form} onFinish={onSubmitFormHandle} layout="vertical">
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Publish Article

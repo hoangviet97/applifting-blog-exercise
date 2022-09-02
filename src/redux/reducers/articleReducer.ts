@@ -1,4 +1,4 @@
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING } from "../actions/types";
+import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING } from "../actions/types";
 
 const initialState = {
   articles: [],
@@ -28,6 +28,11 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         uploadedImage: payload
+      };
+    case DELETE_ARTICLE:
+      return {
+        ...state,
+        articles: state.articles.filter((article: any) => article.articleId !== payload)
       };
     case GET_ARTICLES_FAIL:
       return {

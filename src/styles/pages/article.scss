@@ -45,6 +45,15 @@
       display: flex;
     }
 
+    &__skeleton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-grey;
+      width: 100%;
+      max-height: 400px;
+    }
+
     &__content {
       grid-area: left;
       padding-right: 30px;
