@@ -10,5 +10,6 @@ export const GET_ARTICLE: string = "GET_ARTICLE";
 export const EDIT_ARTICLE: string = "EDIT_ARTICLE";
 export const DELETE_ARTICLE: string = "DELETE_ARTICLE";
 export const ARTICLE_LOADING: string = "ARTICLE_LOADING";
+export const ARTICLES_LOADING: string = "ARTICLES_LOADING";
 export const GET_ARTICLES_FAIL: string = "GET_ARTICLES_FAIL";
 export const UPLOAD_IMAGE: string = "UPLOAD_IMAGE";

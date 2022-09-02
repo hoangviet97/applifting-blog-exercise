@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, EDIT_ARTICLE, DELETE_ARTICLE } from "./types";
+import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, DELETE_ARTICLE } from "./types";
 import { message } from "antd";
 
 export const createArticle = (data: any, image: any) => async (dispatch: Dispatch) => {
@@ -25,6 +25,7 @@ export const createArticle = (data: any, image: any) => async (dispatch: Dispatc
 
 export const getArticles = () => async (dispatch: Dispatch) => {
   try {
+    dispatch(articlesLoading());
     const res = await axiosClient.get("/articles");
     dispatch({ type: GET_ARTICLES, payload: res.data.items });
   } catch (error: any) {
@@ -80,6 +81,12 @@ export const uploadArticleImage = (formdata: any) => async (dispatch: Dispatch) 
   } catch (error: any) {
     dispatch({ type: GET_ARTICLES_FAIL });
   }
+};
+
+export const articlesLoading = () => {
+  return {
+    type: ARTICLES_LOADING
+  };
 };
 
 export const articleLoading = () => {

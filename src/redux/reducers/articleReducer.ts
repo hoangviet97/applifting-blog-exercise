@@ -1,4 +1,4 @@
-import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING } from "../actions/types";
+import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING } from "../actions/types";
 import moment from "moment";
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
   article: {},
   uploadedImage: "",
   images: [],
-  loading: false
+  articlesLoading: false
 };
 
 function articleReducer(state = initialState, action: any) {
@@ -18,8 +18,8 @@ function articleReducer(state = initialState, action: any) {
 
       return {
         ...state,
-        articles: payload,
-        loading: false
+        articles: payload.reverse(),
+        articlesLoading: false
       };
     case GET_ARTICLE:
       return {
@@ -46,6 +46,11 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         loading: true
+      };
+    case ARTICLES_LOADING:
+      return {
+        ...state,
+        articlesLoading: true
       };
     default:
       return state;
