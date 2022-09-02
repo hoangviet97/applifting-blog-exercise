@@ -1,20 +1,19 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, DELETE_ARTICLE } from "./types";
+import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, EDIT_ARTICLE, DELETE_ARTICLE } from "./types";
 import { message } from "antd";
 
 export const createArticle = (data: any, image: any) => async (dispatch: Dispatch) => {
   const config = {
     headers: {
-      "content-type": "multipart/form-data"
+      "Content-Type": "multipart/form-data"
     }
   };
 
   try {
     const imageRes = await axiosClient.post("/images", image, config);
-    console.log(imageRes.data[0].imageId);
     Object.assign(data, { imageId: imageRes.data[0].imageId });
-    console.log(data);
+    console.log(imageRes.data);
     const res = await axiosClient.post("/articles", data);
     message.success("New message successfuly created!");
   } catch (error: any) {
@@ -51,6 +50,17 @@ export const deleteArticle = (id: string) => async (dispatch: Dispatch) => {
     const res = await axiosClient.delete(`/articles/${id}`);
     dispatch({ type: DELETE_ARTICLE, payload: id });
     message.success("Selected article was deleted!");
+  } catch (error: any) {
+    message.error(error.response.data.message);
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
+export const editArticle = (id: string, data: any) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axiosClient.delete(`/articles/${id}`, data);
+    //dispatch({ type: EDIT_ARTICLE, payload: id });
+    message.success("Selected article was updated!");
   } catch (error: any) {
     message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });

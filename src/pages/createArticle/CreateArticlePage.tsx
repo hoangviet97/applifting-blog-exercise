@@ -1,28 +1,40 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Tabs, message, Upload } from "antd";
-import Rea from "markdown-to-jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadArticleImage, createArticle } from "../../redux/actions/articleActions";
-import { SegmentedValue } from "antd/lib/segmented";
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
 
 const CreateArticlePage = () => {
   const dispatch = useDispatch<any>();
   const [form] = Form.useForm();
-  const formData = new FormData();
   const [content, setContent] = useState<string>("");
-  const [fileCheck, setFileCheck] = useState<any>(0);
-  const [check, setCheck] = useState<any>([]);
+  const [check, setCheck] = useState<any>();
+  const [img, setImg] = useState<string>("");
 
   const { TextArea } = Input;
 
   const onSubmitFormHandle = (values: any) => {
-    dispatch(createArticle(values, formData));
+    const formData = new FormData();
+    formData.append("image", check);
+
+    if (img.length > 0) {
+      dispatch(createArticle(values, formData));
+    } else {
+      message.error("Feature image cannot be null!");
+    }
   };
 
   const onUploadImage = (e: any) => {
-    formData.append("image", e.file);
+    if (e.fileList.length > 0) {
+      setCheck(e.file);
+      const x = URL.createObjectURL(e.file);
+      setImg(x);
+    }
+  };
+
+  const onRemoveImage = (e: any) => {
+    setImg("");
   };
 
   return (
@@ -40,8 +52,9 @@ const CreateArticlePage = () => {
           <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
             <Input />
           </Form.Item>
-          <Form.Item label="Image" rules={[{ required: true, message: "Please input perex text!" }]}>
-            <Upload listType="picture" beforeUpload={() => false} className="upload-list-inline" maxCount={1} onChange={onUploadImage}>
+          <Form.Item label="Feature image">
+            {img.length > 0 && <img className="article__feature-img" src={img} alt="feature image" />}
+            <Upload beforeUpload={() => false} onRemove={onRemoveImage} maxCount={1} onChange={(e) => onUploadImage(e)}>
               <Button>Upload image</Button>
             </Upload>
           </Form.Item>

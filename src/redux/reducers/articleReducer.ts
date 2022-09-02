@@ -1,4 +1,5 @@
 import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING } from "../actions/types";
+import moment from "moment";
 
 const initialState = {
   articles: [],
@@ -13,6 +14,8 @@ function articleReducer(state = initialState, action: any) {
 
   switch (type) {
     case GET_ARTICLES:
+      //const data = payload.sort((a: any, b: any) => moment(b.createdAt).format("MMMM Do YYYY, h:mm:ss") - moment(a.createdAt, "MMMM Do YYYY, h:mm:ss"));
+
       return {
         ...state,
         articles: payload,

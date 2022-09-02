@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ReactMarkdown from "react-markdown";
 import axiosClient from "../../helpers/axios";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import ArticlePreviewSkeleton from "../Skeletons/ArticlePreviewSkeleton";
 
 interface Props {
@@ -34,7 +35,7 @@ const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {
         <h2>{article.title}</h2>
         <div className="article-preview__info">
           <div className="article-detail__author">{user}</div>
-          <div className="article-detail__date">{article.createdAt}</div>
+          <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
         </div>
         <div>{article.perex}</div>
         <Link to={`${article.articleId}`}>Read whole article</Link>

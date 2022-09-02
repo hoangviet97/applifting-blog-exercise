@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button, Form, Input, Tabs, message, Upload } from "antd";
 import Markdown from "markdown-to-jsx";
+import axiosClient from "../../helpers/axios";
 import { getArticle, createArticle } from "../../redux/actions/articleActions";
 
 const ArticleEdit = () => {
@@ -12,20 +13,29 @@ const ArticleEdit = () => {
   const formData = new FormData();
   const [form] = Form.useForm();
 
-  const [fileCheck, setFileCheck] = useState(false);
+  const [img, setImg] = useState("");
 
   const article = useSelector((state: any) => state.articleReducer.article);
+
+  const getImage = async (id: string) => {
+    const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
+    const dat = URL.createObjectURL(res.data);
+    console.log(res);
+    const fileList = { uid: "1", name: "orig", status: "done", url: dat, thumbUrl: dat };
+    setImg(dat);
+  };
 
   useEffect(() => {
     dispatch(getArticle(params.articleId));
   }, []);
 
   useEffect(() => {
+    article.imageId !== undefined && getImage(article.imageId);
     form.setFieldsValue({ title: article.title, perex: article.perex, content: article.content });
   }, [article]);
 
   const onSubmitFormHandle = (values: any) => {
-    dispatch(createArticle(values, formData));
+    //dispatch(createArticle(values, formData));
   };
 
   const onUploadImage = (e: any) => {
@@ -48,11 +58,13 @@ const ArticleEdit = () => {
             <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
               <Input />
             </Form.Item>
-            <Form.Item>
+            <Form.Item label="Feature image">
+              <img className="article__feature-img" src={img} alt="feature image" />
               <Upload listType="picture" beforeUpload={() => false} maxCount={1} onChange={onUploadImage}>
                 <Button>Upload image</Button>
               </Upload>
             </Form.Item>
+
             <Form.Item label="Perex" name="perex" rules={[{ required: true, message: "Please input perex text!" }]}>
               <TextArea autoSize={{ minRows: 4, maxRows: 4 }} autoComplete="false" />
             </Form.Item>

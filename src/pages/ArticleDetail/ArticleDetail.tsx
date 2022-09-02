@@ -43,7 +43,8 @@ const ArticleDetail = () => {
           <h1>{article.title}</h1>
           <div className="article-detail__info">
             <div className="article-detail__author">{user}</div>
-            <div className="article-detail__date">{article.createdAt}</div>
+            <div className="article-detail__divider"></div>
+            <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
           </div>
           <div className="article-detail__image-box">{<img className="article-detail__image" src={img} alt="image" />}</div>
           <div className="article-detail__text">
@@ -56,6 +57,7 @@ const ArticleDetail = () => {
           <h3>Related articles</h3>
           <div className="article-detail__related-list">
             {articles
+              .slice(0, 4)
               .filter((i: any) => i.articleId !== article.articleId)
               .map((article: any) => (
                 <div>
