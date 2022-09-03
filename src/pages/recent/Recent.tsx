@@ -5,9 +5,10 @@ import ArticlePreview from "../../components/article/ArticlePreview";
 import moment from "moment";
 import { Skeleton } from "antd";
 import { article } from "../../types/types";
+import { AppDispatch } from "../../redux/store";
 
 const Recent: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const articles = useSelector((state: any) => state.articleReducer.articles);
   const loading = useSelector((state: any) => state.articleReducer.articlesLoading);
 
@@ -18,7 +19,7 @@ const Recent: React.FunctionComponent = () => {
   return (
     <div className="recent-articles container container__content">
       <h1>Recent Articles</h1>
-      <div className="recent-articles__list">{loading ? <Skeleton /> : articles.map((article: article, index: number) => <ArticlePreview key={index} article={article} />)}</div>
+      <div className="recent-articles__list">{loading ? <Skeleton /> : articles.slice(0, 5).map((article: article, index: number) => <ArticlePreview key={index} article={article} />)}</div>
     </div>
   );
 };

@@ -6,10 +6,11 @@ import { getArticles, deleteArticle } from "../../redux/actions/articleActions";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { article } from "../../types/types";
+import { AppDispatch } from "../../redux/store";
 
 const MyArticles: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
-  const [editedArticles, setEditedArticles] = useState<any>([]);
+  const dispatch: AppDispatch = useDispatch();
+  const [editedArticles, setEditedArticles] = useState<DataType[]>([]);
 
   // selectors
   const user = useSelector((state: any) => state.authReducer.user);
@@ -40,7 +41,8 @@ const MyArticles: React.FunctionComponent = () => {
   const columns: ColumnsType<DataType> = [
     {
       title: "Article title",
-      dataIndex: "title"
+      dataIndex: "title",
+      sorter: (a: any, b: any) => a.title - b.title
     },
     {
       title: "Perex",

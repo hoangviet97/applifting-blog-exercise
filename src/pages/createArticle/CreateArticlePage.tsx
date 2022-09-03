@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadArticleImage, createArticle } from "../../redux/actions/articleActions";
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
+import { AppDispatch } from "../../redux/store";
 
 const CreateArticlePage: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
   const [content, setContent] = useState<string>("");
   const [check, setCheck] = useState<any>();
@@ -55,7 +56,7 @@ const CreateArticlePage: React.FunctionComponent = () => {
           <Form.Item label="Feature image">
             {img.length > 0 && <img className="article__feature-img" src={img} alt="feature image" />}
             <Upload beforeUpload={() => false} onRemove={onRemoveImage} maxCount={1} onChange={(e) => onUploadImage(e)}>
-              <Button>Upload image</Button>
+              <Button>Upload an Image</Button>
             </Upload>
           </Form.Item>
           <Form.Item label="Perex" name="perex" rules={[{ required: true, message: "Please input perex text!" }]}>

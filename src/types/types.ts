@@ -13,6 +13,6 @@ export type comment = {
   commentId: string;
   author: string;
   content: string;
-  createdAt: Date;
+  createdAt: any;
   score: number;
 };

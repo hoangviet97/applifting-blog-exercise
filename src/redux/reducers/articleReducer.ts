@@ -1,10 +1,9 @@
 import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, ADD_COMMENT, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, SET_UP_VOTE, SET_DOWN_VOTE } from "../actions/types";
-import moment from "moment";
+import { article, comment } from "../../types/types";
 
 const initialState = {
   articles: [],
   article: {},
-  uploadedImage: "",
   images: [],
   articlesLoading: false,
   articleComments: []
@@ -35,7 +34,7 @@ function articleReducer(state = initialState, action: any) {
     case DELETE_ARTICLE:
       return {
         ...state,
-        articles: state.articles.filter((article: any) => article.articleId !== payload)
+        articles: state.articles.filter((article: article) => article.articleId !== payload)
       };
     case ADD_COMMENT:
       return {
@@ -45,12 +44,12 @@ function articleReducer(state = initialState, action: any) {
     case SET_UP_VOTE:
       return {
         ...state,
-        articleComments: state.articleComments.map((comment: any) => (comment.commentId === payload.id ? payload.data : comment))
+        articleComments: state.articleComments.map((comment: comment) => (comment.commentId === payload.id ? payload.data : comment))
       };
     case SET_DOWN_VOTE:
       return {
         ...state,
-        articleComments: state.articleComments.map((comment: any) => (comment.commentId === payload.id ? payload.data : comment))
+        articleComments: state.articleComments.map((comment: comment) => (comment.commentId === payload.id ? payload.data : comment))
       };
     case GET_ARTICLES_FAIL:
       return {

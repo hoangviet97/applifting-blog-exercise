@@ -5,13 +5,14 @@ import { Tooltip, Comment, Avatar } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { comment } from "../../types/types";
 import { setUpVote, setDownVote } from "../../redux/actions/articleActions";
+import { AppDispatch } from "../../redux/store";
 
 interface Props {
   item: comment;
 }
 
 const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt, score } }) => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const [action, setAction] = useState<string | null>(null);
 
   const like = () => {
@@ -40,7 +41,7 @@ const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt,
     </Tooltip>
   ];
 
-  return <Comment actions={actions} author={<a>{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p>{content}</p>} datetime={<span>{}</span>} />;
+  return <Comment actions={actions} author={<a>{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p>{content}</p>} datetime={<span>{moment(createdAt).locale("cs").fromNow()}</span>} />;
 };
 
 export default CommentItem;

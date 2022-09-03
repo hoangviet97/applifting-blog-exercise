@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Popover, Button } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { logout } from "../../redux/actions/authActions";
+import { AppDispatch } from "../../redux/store";
 
 const PrivateNavigation: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: any) => state.authReducer.user);
 
   const logoutHandle = () => {

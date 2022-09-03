@@ -5,10 +5,11 @@ import CommentEditor from "./CommentEditor";
 import CommentList from "./CommentList";
 import { useParams } from "react-router-dom";
 import { addComment } from "../../redux/actions/articleActions";
+import { AppDispatch } from "../../redux/store";
 
 const CommentSection: React.FunctionComponent = () => {
   const params: any = useParams();
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: any) => state.authReducer.user);
   const comments = useSelector((state: any) => state.articleReducer.articleComments);
 

@@ -23,6 +23,36 @@ export const createArticle = (data: any, image: any) => async (dispatch: Dispatc
   }
 };
 
+export const updateArticleWithImage = (article: string, data: any, ogImage: string, image: any) => async (dispatch: Dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  };
+
+  try {
+    // post new image
+    console.log(ogImage);
+    const imageRes = await axiosClient.post("/images", image, config);
+    Object.assign(data, { imageId: imageRes.data[0].imageId });
+    const res = await axiosClient.patch(`/articles/${article}`, data);
+    message.success("Article was successfuly edited!");
+  } catch (error: any) {
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
+export const updateArticleWithoutImage = (id: string, data: any) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axiosClient.patch(`/articles/${id}`, data);
+    message.success("Article was successfuly edited!");
+  } catch (error: any) {
+    console.log(error.response.data);
+    message.error(error.response.data.message);
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
 export const getArticles = () => async (dispatch: Dispatch) => {
   try {
     dispatch(articlesLoading());

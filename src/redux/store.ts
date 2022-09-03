@@ -9,4 +9,6 @@ const middleware = [thunk];
 
 const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
 
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

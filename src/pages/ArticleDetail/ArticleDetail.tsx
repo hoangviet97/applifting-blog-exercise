@@ -1,20 +1,22 @@
-import React, { createElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Params } from "react-router-dom";
 import { getArticle, getArticles } from "../../redux/actions/articleActions";
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from "@ant-design/icons";
 import moment from "moment";
-import { Avatar, Comment, Tooltip, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import axiosClient from "../../helpers/axios";
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
 import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleton";
 import CommentSection from "../../components/comments/CommentSection";
+import { article } from "../../types/types";
+import { AppDispatch } from "../../redux/store";
 
 const ArticleDetail: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const params: any = useParams();
   const [img, setImg] = useState<string>("");
+  const [imgLoading, setImgLoading] = useState<boolean>(false);
 
   const user = useSelector((state: any) => state.authReducer.user);
   const article = useSelector((state: any) => state.articleReducer.article);
@@ -22,14 +24,20 @@ const ArticleDetail: React.FunctionComponent = () => {
   const isLoading = useSelector((state: any) => state.articleReducer.loading);
 
   const getImage = async (id: string) => {
+    setImgLoading(true);
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
     const dat = URL.createObjectURL(res.data);
     setImg(dat);
+    setImgLoading(false);
   };
 
   useEffect(() => {
     dispatch(getArticle(params.articleId));
     dispatch(getArticles());
+
+    return () => {
+      setImg("");
+    };
   }, []);
 
   useEffect(() => {
@@ -48,7 +56,7 @@ const ArticleDetail: React.FunctionComponent = () => {
             <div className="article-detail__divider"></div>
             <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
           </div>
-          <div className="article-detail__image-box">{<img className="article-detail__image" src={img} alt="image" />}</div>
+          <div className="article-detail__image-box">{imgLoading ? <ArticleImageSkeleton /> : <img className="article-detail__image" src={img} alt="image" />}</div>
           <div className="article-detail__text">
             <ReactMarkdown>{article && article.content}</ReactMarkdown>
           </div>
@@ -63,11 +71,11 @@ const ArticleDetail: React.FunctionComponent = () => {
           <div className="article-detail__related-list">
             {articles
               .slice(0, 4)
-              .filter((i: any) => i.articleId !== article.articleId)
-              .map((article: any) => (
+              .filter((i: article) => i.articleId !== article.articleId)
+              .map((article: article) => (
                 <div>
                   <h4>{article.title}</h4>
-                  <p>frfnnfnf fnefnefn nfne fnefefnejf nefnesnkenfe fenfenfe fejnff nfefn</p>
+                  <p>{article.perex}</p>
                 </div>
               ))}
           </div>

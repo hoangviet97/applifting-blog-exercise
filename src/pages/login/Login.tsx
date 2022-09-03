@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/actions/authActions";
 import { Form, Input, Button } from "antd";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { AppDispatch } from "../../redux/store";
 
 const Login: React.FunctionComponent = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch: AppDispatch = useDispatch();
   const isAuthenticated = useSelector((state: any) => state.authReducer.isAuthenticated);
   const navigate: NavigateFunction = useNavigate();
 
