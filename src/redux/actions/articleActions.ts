@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, ADD_COMMENT, DELETE_ARTICLE } from "./types";
+import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, ADD_COMMENT, SET_UP_VOTE, SET_DOWN_VOTE, DELETE_ARTICLE } from "./types";
 import { message } from "antd";
 
 export const createArticle = (data: any, image: any) => async (dispatch: Dispatch) => {
@@ -71,9 +71,33 @@ export const editArticle = (id: string, data: any) => async (dispatch: Dispatch)
 export const addComment = (data: any) => async (dispatch: Dispatch) => {
   try {
     const res = await axiosClient.post(`/comments`, data);
-    console.log(res);
-    //dispatch({ type: EDIT_ARTICLE, payload: id });
+    console.log(res.data);
+    dispatch({ type: ADD_COMMENT, payload: res.data });
     message.success("Comment created");
+  } catch (error: any) {
+    console.log(error);
+    message.error(error.response.data.message);
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
+export const setUpVote = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axiosClient.post(`/comments/${id}/vote/up`);
+    console.log(res.data);
+    dispatch({ type: SET_UP_VOTE, payload: { id: id, data: res.data } });
+  } catch (error: any) {
+    console.log(error);
+    message.error(error.response.data.message);
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
+export const setDownVote = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axiosClient.post(`/comments/${id}/vote/down`);
+    console.log(res.data);
+    dispatch({ type: SET_DOWN_VOTE, payload: { id: id, data: res.data } });
   } catch (error: any) {
     console.log(error);
     message.error(error.response.data.message);

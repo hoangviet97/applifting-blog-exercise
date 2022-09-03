@@ -5,8 +5,9 @@ import { Button, Table, Space } from "antd";
 import { getArticles, deleteArticle } from "../../redux/actions/articleActions";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { article } from "../../types/types";
 
-const MyArticles = () => {
+const MyArticles: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const [editedArticles, setEditedArticles] = useState<any>([]);
 
@@ -19,7 +20,7 @@ const MyArticles = () => {
   }, []);
 
   useEffect(() => {
-    const ogArticles = articles.map((article: any) => ({ ...article, comments: 2 }));
+    const ogArticles = articles.map((article: article) => ({ ...article, comments: 2 }));
     setEditedArticles(ogArticles);
   }, [articles]);
 

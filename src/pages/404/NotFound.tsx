@@ -1,6 +1,6 @@
 import React from "react";
 
-const NotFound = () => {
+const NotFound: React.FunctionComponent = () => {
   return (
     <div>
       <h1>Content not found</h1>

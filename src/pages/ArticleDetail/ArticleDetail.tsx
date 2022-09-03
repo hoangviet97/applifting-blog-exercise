@@ -11,7 +11,7 @@ import Markdown from "markdown-to-jsx";
 import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleton";
 import CommentSection from "../../components/comments/CommentSection";
 
-const ArticleDetail = () => {
+const ArticleDetail: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const params: any = useParams();
   const [img, setImg] = useState<string>("");

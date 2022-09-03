@@ -4,6 +4,7 @@ import { getArticles } from "../../redux/actions/articleActions";
 import ArticlePreview from "../../components/article/ArticlePreview";
 import moment from "moment";
 import { Skeleton } from "antd";
+import { article } from "../../types/types";
 
 const Recent: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
@@ -17,7 +18,7 @@ const Recent: React.FunctionComponent = () => {
   return (
     <div className="recent-articles container container__content">
       <h1>Recent Articles</h1>
-      <div className="recent-articles__list">{loading ? <Skeleton /> : articles.map((article: any, index: number) => <ArticlePreview key={index} article={article} />)}</div>
+      <div className="recent-articles__list">{loading ? <Skeleton /> : articles.map((article: article, index: number) => <ArticlePreview key={index} article={article} />)}</div>
     </div>
   );
 };

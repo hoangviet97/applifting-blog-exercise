@@ -14,3 +14,5 @@ export const ARTICLES_LOADING: string = "ARTICLES_LOADING";
 export const GET_ARTICLES_FAIL: string = "GET_ARTICLES_FAIL";
 export const UPLOAD_IMAGE: string = "UPLOAD_IMAGE";
 export const ADD_COMMENT: string = "ADD_COMMENT";
+export const SET_UP_VOTE: string = "SET_UP_VOTE";
+export const SET_DOWN_VOTE: string = "SET_DOWN_VOTE";

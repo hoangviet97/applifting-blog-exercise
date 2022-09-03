@@ -7,7 +7,7 @@ import axiosClient from "../../helpers/axios";
 import { getArticle, createArticle } from "../../redux/actions/articleActions";
 import { loading } from "../../redux/actions/authActions";
 
-const ArticleEdit = () => {
+const ArticleEdit: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const params: any = useParams();
   const { TextArea } = Input;

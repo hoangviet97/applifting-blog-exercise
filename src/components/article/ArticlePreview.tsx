@@ -5,9 +5,10 @@ import axiosClient from "../../helpers/axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import ArticlePreviewSkeleton from "../Skeletons/ArticlePreviewSkeleton";
+import { article } from "../../types/types";
 
 interface Props {
-  article: any;
+  article: article;
 }
 
 const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {

@@ -1,4 +1,4 @@
-import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING } from "../actions/types";
+import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, ADD_COMMENT, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, SET_UP_VOTE, SET_DOWN_VOTE } from "../actions/types";
 import moment from "moment";
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
   uploadedImage: "",
   images: [],
   articlesLoading: false,
-  comments: []
+  articleComments: []
 };
 
 function articleReducer(state = initialState, action: any) {
@@ -15,8 +15,6 @@ function articleReducer(state = initialState, action: any) {
 
   switch (type) {
     case GET_ARTICLES:
-      //const data = payload.sort((a: any, b: any) => moment(b.createdAt).format("MMMM Do YYYY, h:mm:ss") - moment(a.createdAt, "MMMM Do YYYY, h:mm:ss"));
-
       return {
         ...state,
         articles: payload.reverse(),
@@ -26,6 +24,7 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         article: payload,
+        articleComments: payload.comments,
         loading: false
       };
     case UPLOAD_IMAGE:
@@ -37,6 +36,21 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         articles: state.articles.filter((article: any) => article.articleId !== payload)
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        articleComments: [payload, ...state.articleComments]
+      };
+    case SET_UP_VOTE:
+      return {
+        ...state,
+        articleComments: state.articleComments.map((comment: any) => (comment.commentId === payload.id ? payload.data : comment))
+      };
+    case SET_DOWN_VOTE:
+      return {
+        ...state,
+        articleComments: state.articleComments.map((comment: any) => (comment.commentId === payload.id ? payload.data : comment))
       };
     case GET_ARTICLES_FAIL:
       return {

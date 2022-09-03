@@ -1,21 +1,25 @@
 import React, { useState, FC } from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 import { Tooltip, Comment, Avatar } from "antd";
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from "@ant-design/icons";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { comment } from "../../types/types";
+import { setUpVote, setDownVote } from "../../redux/actions/articleActions";
 
 interface Props {
-  comment: any;
+  item: comment;
 }
 
-const CommentItem: FC<Props> = ({ comment: { author, content, postedAt, score } }) => {
+const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt, score } }) => {
+  const dispatch = useDispatch<any>();
   const [action, setAction] = useState<string | null>(null);
 
   const like = () => {
-    setAction("liked");
+    dispatch(setUpVote(commentId));
   };
 
   const dislike = () => {
-    setAction("disliked");
+    dispatch(setDownVote(commentId));
   };
 
   const actions = [
@@ -25,14 +29,18 @@ const CommentItem: FC<Props> = ({ comment: { author, content, postedAt, score } 
       </div>
     </Tooltip>,
     <Tooltip key="comment-basic-like" title="Like">
-      <span onClick={like}>{React.createElement(action === "liked" ? LikeFilled : LikeOutlined)}</span>
+      <span onClick={like}>
+        <UpOutlined />
+      </span>
     </Tooltip>,
     <Tooltip key="comment-basic-dislike" title="Dislike">
-      <span onClick={dislike}>{React.createElement(action === "disliked" ? DislikeFilled : DislikeOutlined)}</span>
+      <span onClick={dislike}>
+        <DownOutlined />
+      </span>
     </Tooltip>
   ];
 
-  return <Comment actions={actions} author={<a>{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p>{content}</p>} datetime={<span>{postedAt}</span>} />;
+  return <Comment actions={actions} author={<a>{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p>{content}</p>} datetime={<span>{}</span>} />;
 };
 
 export default CommentItem;

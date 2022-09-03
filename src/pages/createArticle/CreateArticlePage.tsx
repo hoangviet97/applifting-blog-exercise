@@ -5,7 +5,7 @@ import { uploadArticleImage, createArticle } from "../../redux/actions/articleAc
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
 
-const CreateArticlePage = () => {
+const CreateArticlePage: React.FunctionComponent = () => {
   const dispatch = useDispatch<any>();
   const [form] = Form.useForm();
   const [content, setContent] = useState<string>("");

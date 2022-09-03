@@ -14,7 +14,7 @@ const CommentEditor: FC<Props> = ({ onChange, onSubmit, submitting, value }) => 
   return (
     <>
       <Form.Item>
-        <TextArea rows={4} onChange={onChange} value={value} />
+        <TextArea autoSize onChange={onChange} value={value} placeholder="Join the discussion" />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">

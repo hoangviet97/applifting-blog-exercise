@@ -6,11 +6,11 @@ import CommentList from "./CommentList";
 import { useParams } from "react-router-dom";
 import { addComment } from "../../redux/actions/articleActions";
 
-const CommentSection = () => {
+const CommentSection: React.FunctionComponent = () => {
   const params: any = useParams();
   const dispatch = useDispatch<any>();
   const user = useSelector((state: any) => state.authReducer.user);
-  const comments = useSelector((state: any) => state.authReducer.comments);
+  const comments = useSelector((state: any) => state.articleReducer.articleComments);
 
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
@@ -31,6 +31,7 @@ const CommentSection = () => {
 
   return (
     <div>
+      <div>Comments ({comments.length})</div>
       <Comment
         avatar={
           <Avatar shape="circle" style={{ backgroundColor: "#87d068" }} alt="Han Solo">
@@ -39,7 +40,7 @@ const CommentSection = () => {
         }
         content={<CommentEditor onChange={handleChange} onSubmit={handleSubmit} submitting={submitting} value={value} />}
       />
-      {<CommentList />}
+      <CommentList />
     </div>
   );
 };
