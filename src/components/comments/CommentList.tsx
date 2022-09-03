@@ -3,9 +3,16 @@ import CommentItem from "./CommentItem";
 import { useSelector } from "react-redux";
 
 const CommentList = () => {
-  const comments = useSelector((state: any) => state.articleReducer.article.comments);
+  const comments = useSelector((state: any) => state.articleReducer.comments);
+  //const [comments, setComments] = useState([]);
 
-  return <div>{comments && comments.map((comment: any) => <CommentItem />)}</div>;
+  return (
+    <div>
+      {comments.map((comment: any) => (
+        <CommentItem comment={comment} />
+      ))}
+    </div>
+  );
 };
 
 export default CommentList;

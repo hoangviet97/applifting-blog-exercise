@@ -6,7 +6,8 @@ const initialState = {
   article: {},
   uploadedImage: "",
   images: [],
-  articlesLoading: false
+  articlesLoading: false,
+  comments: []
 };
 
 function articleReducer(state = initialState, action: any) {

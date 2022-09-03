@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, DELETE_ARTICLE } from "./types";
+import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, ADD_COMMENT, DELETE_ARTICLE } from "./types";
 import { message } from "antd";
 
 export const createArticle = (data: any, image: any) => async (dispatch: Dispatch) => {
@@ -63,6 +63,19 @@ export const editArticle = (id: string, data: any) => async (dispatch: Dispatch)
     //dispatch({ type: EDIT_ARTICLE, payload: id });
     message.success("Selected article was updated!");
   } catch (error: any) {
+    message.error(error.response.data.message);
+    dispatch({ type: GET_ARTICLES_FAIL });
+  }
+};
+
+export const addComment = (data: any) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axiosClient.post(`/comments`, data);
+    console.log(res);
+    //dispatch({ type: EDIT_ARTICLE, payload: id });
+    message.success("Comment created");
+  } catch (error: any) {
+    console.log(error);
     message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });
   }
