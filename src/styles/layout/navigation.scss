@@ -1,6 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
+  gap: 15px;
 
   &__icon {
     margin-right: 15px;
@@ -9,6 +10,7 @@
   &__list {
     display: flex;
     align-items: center;
+    gap: 25px;
   }
 
   &__item {

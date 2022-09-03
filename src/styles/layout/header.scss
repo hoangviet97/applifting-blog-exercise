@@ -1,12 +1,15 @@
 .header {
   background-color: $header-grey;
-  height: 56px;
+
+  &__auth {
+    display: flex;
+    align-items: center;
+  }
 
   &__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    line-height: 56px;
   }
 
   &__control {

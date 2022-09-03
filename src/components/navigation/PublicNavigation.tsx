@@ -7,21 +7,18 @@ const PublicNavigation: React.FunctionComponent = () => {
     <div className="nav">
       <div className="nav__icon">
         <Link to="/">
-          <img src={Logo} alt="logo" width={39} height={44} />
+          <img src={Logo} alt="logo" width={39} height={44} style={{ lineHeight: "44px" }} />
         </Link>
       </div>
-      <ul className="nav__list">
-        <li className="nav__item">
-          <Link to="/articles" className="nav__link">
-            Recent Articles
-          </Link>
-        </li>
-        <li className="nav__item">
-          <Link to="" className="nav__link">
-            About
-          </Link>
-        </li>
-      </ul>
+      <div className="nav__list">
+        <Link to="/articles" className="nav__link">
+          Recent Articles
+        </Link>
+
+        <Link to="" className="nav__link">
+          About
+        </Link>
+      </div>
     </div>
   );
 };

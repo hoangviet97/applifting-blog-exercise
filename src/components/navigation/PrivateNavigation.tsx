@@ -23,21 +23,19 @@ const PrivateNavigation: React.FunctionComponent = () => {
 
   return (
     <div className="nav">
-      <ul className="nav__list">
-        <li className="nav__item">
+      <div style={{ display: "flex", alignItems: "center", padding: 0 }}>
+        <div className="nav__list">
           <Link to="/my-articles" className="nav__link">
             My Articles
           </Link>
-        </li>
-        <li className="nav__item">
           <Link to="/new-article" className="nav__link">
             Create Article
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
       <div className="nav__profile">
         <Popover placement="bottom" content={content} trigger="click">
-          <Button type="text" icon={<CaretDownOutlined />} />
+          <Button type="text" icon={<CaretDownOutlined style={{ fontSize: "12px" }} />} />
         </Popover>
         <Avatar shape="circle" style={{ backgroundColor: "#87d068" }}>
           {user[0]}

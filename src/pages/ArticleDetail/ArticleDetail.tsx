@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Params } from "react-router-dom";
 import { getArticle, getArticles } from "../../redux/actions/articleActions";
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { Avatar, Comment, Tooltip, Skeleton } from "antd";
 import axiosClient from "../../helpers/axios";
 import ReactMarkdown from "react-markdown";
 import Markdown from "markdown-to-jsx";
 import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleton";
+import CommentSection from "../../components/comments/CommentSection";
 
 const ArticleDetail = () => {
   const dispatch = useDispatch<any>();
@@ -49,6 +51,9 @@ const ArticleDetail = () => {
           <div className="article-detail__image-box">{<img className="article-detail__image" src={img} alt="image" />}</div>
           <div className="article-detail__text">
             <ReactMarkdown>{article && article.content}</ReactMarkdown>
+          </div>
+          <div className="article-detail__comments">
+            <CommentSection />
           </div>
         </div>
       )}

@@ -39,15 +39,15 @@ const CreateArticlePage = () => {
 
   return (
     <div className="article-operation container container__content">
-      <header>
-        <h1>Create new article</h1>
-      </header>
       <div className="article-operation__body">
         <Form form={form} onFinish={onSubmitFormHandle} layout="vertical">
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Publish Article
-            </Button>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <h1>Create new article</h1>
+              <Button type="primary" htmlType="submit">
+                Publish Article
+              </Button>
+            </div>
           </Form.Item>
           <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
             <Input />

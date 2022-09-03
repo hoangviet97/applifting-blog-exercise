@@ -5,7 +5,7 @@ import HeaderAuth from "./HeaderAuth";
 const Header: React.FunctionComponent = () => {
   return (
     <div className="header">
-      <div className="header__content container">
+      <div style={{ width: "1170px", margin: "0 auto", display: "flex", justifyContent: "space-between", padding: "10px 0" }}>
         <PublicNavigation />
         <HeaderAuth />
       </div>

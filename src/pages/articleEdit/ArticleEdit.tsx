@@ -5,6 +5,7 @@ import { Button, Form, Input, Tabs, message, Upload } from "antd";
 import Markdown from "markdown-to-jsx";
 import axiosClient from "../../helpers/axios";
 import { getArticle, createArticle } from "../../redux/actions/articleActions";
+import { loading } from "../../redux/actions/authActions";
 
 const ArticleEdit = () => {
   const dispatch = useDispatch<any>();
@@ -14,18 +15,19 @@ const ArticleEdit = () => {
   const [form] = Form.useForm();
 
   const [img, setImg] = useState("");
+  const [imgLoading, setImgLoading] = useState(false);
 
   const article = useSelector((state: any) => state.articleReducer.article);
 
   const getImage = async (id: string) => {
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
     const dat = URL.createObjectURL(res.data);
-    console.log(res);
-    const fileList = { uid: "1", name: "orig", status: "done", url: dat, thumbUrl: dat };
     setImg(dat);
+    setImgLoading(false);
   };
 
   useEffect(() => {
+    setImgLoading(true);
     dispatch(getArticle(params.articleId));
   }, []);
 
@@ -59,7 +61,7 @@ const ArticleEdit = () => {
               <Input />
             </Form.Item>
             <Form.Item label="Feature image">
-              <img className="article__feature-img" src={img} alt="feature image" />
+              {imgLoading ? <div>loading...</div> : <img className="article__feature-img" src={img} alt="feature image" />}
               <Upload listType="picture" beforeUpload={() => false} maxCount={1} onChange={onUploadImage}>
                 <Button>Upload image</Button>
               </Upload>
