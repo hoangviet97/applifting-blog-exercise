@@ -10,7 +10,7 @@ const mockStore = configureStore([]);
 
 const store = mockStore({
   authReducer: {
-    isAuthenticated: true,
+    isAuthenticated: false,
     user: "viet97"
   }
 });

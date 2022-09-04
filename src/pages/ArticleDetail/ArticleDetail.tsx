@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Params } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getArticle, getArticles } from "../../redux/actions/articleActions";
-import moment from "moment";
 import { Skeleton } from "antd";
 import axiosClient from "../../helpers/axios";
 import ReactMarkdown from "react-markdown";
@@ -11,6 +10,7 @@ import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleto
 import CommentSection from "../../components/comments/CommentSection";
 import { article } from "../../types/types";
 import { AppDispatch } from "../../redux/store";
+import ArticleSecondaryInfo from "../../components/article/ArticleSecondaryInfo";
 
 const ArticleDetail: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,9 +19,7 @@ const ArticleDetail: React.FunctionComponent = () => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
   const user = useSelector((state: any) => state.authReducer.user);
-  const article = useSelector((state: any) => state.articleReducer.article);
-  const articles = useSelector((state: any) => state.articleReducer.articles);
-  const isLoading = useSelector((state: any) => state.articleReducer.loading);
+  const { article, articles, isLoading } = useSelector((state: any) => state.articleReducer);
 
   const getImage = async (id: string) => {
     setImgLoading(true);
@@ -51,13 +49,10 @@ const ArticleDetail: React.FunctionComponent = () => {
       ) : (
         <div className="article-detail__content left-area">
           <h1>{article.title}</h1>
-          <div className="article-detail__info">
-            <div className="article-detail__author">{user}</div>
-            <div className="article-detail__divider"></div>
-            <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
-          </div>
+          <ArticleSecondaryInfo user={user} createdAt={article.createdAt} />
           <div className="article-detail__image-box">{imgLoading ? <ArticleImageSkeleton /> : <img className="article-detail__image" src={img} alt="image" />}</div>
           <div className="article-detail__text">
+            <ReactMarkdown>{article && article.perex}</ReactMarkdown>
             <ReactMarkdown>{article && article.content}</ReactMarkdown>
           </div>
           <div className="article-detail__comments">

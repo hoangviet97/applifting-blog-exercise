@@ -15,16 +15,15 @@ import Highlighter from "react-highlight-words";
 const MyArticles: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const searchInput = useRef<InputRef>(null);
+  type DataIndex = keyof DataType;
 
   // States
   const [searchText, setSearchText] = useState<string>("");
   const [searchedColumn, setSearchedColumn] = useState<string>("");
 
   // Selectors
-  const user = useSelector((state: any) => state.authReducer.user);
-  const articles = useSelector((state: any) => state.articleReducer.articles);
-
-  type DataIndex = keyof DataType;
+  const { user } = useSelector((state: any) => state.authReducer);
+  const { articles } = useSelector((state: any) => state.articleReducer);
 
   useEffect(() => {
     dispatch(getArticles());

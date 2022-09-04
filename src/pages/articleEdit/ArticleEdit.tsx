@@ -20,8 +20,7 @@ const ArticleEdit: React.FunctionComponent = () => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [isModified, setIsModified] = useState<boolean>(false);
 
-  const article = useSelector((state: any) => state.articleReducer.article);
-  const isLoading = useSelector((state: any) => state.articleReducer.loading);
+  const { article, isLoading } = useSelector((state: any) => state.articleReducer);
 
   const getImage = async (id: string) => {
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });

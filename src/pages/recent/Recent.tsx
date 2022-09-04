@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getArticles } from "../../redux/actions/articleActions";
+import { getArticles, resetArticles } from "../../redux/actions/articleActions";
 import ArticlePreview from "../../components/article/ArticlePreview";
-import FullPageLoader from "../../components/Skeletons/FullPageLoader";
 import { article } from "../../types/types";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, AppState } from "../../redux/store";
 
 const Recent: React.FunctionComponent = () => {
-  const dispatch: any = useDispatch();
-  const articles = useSelector((state: any) => state.articleReducer.articles);
-  const loading = useSelector((state: any) => state.articleReducer.articlesLoading);
+  const dispatch: AppDispatch = useDispatch();
+  const { articles, loading } = useSelector((state: any) => state.articleReducer);
 
   useEffect(() => {
     dispatch(getArticles());
+
+    return () => {
+      dispatch(resetArticles());
+    };
   }, []);
 
   return (

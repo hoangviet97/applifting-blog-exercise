@@ -28,6 +28,8 @@ beforeEach(() => {
 it("Should render all article preview elements", () => {
   const title = screen.getByRole("heading", { name: /Test article 2/i });
   const img = screen.getByRole("img");
+  const link = screen.getByTestId("article-link");
   expect(title).toBeInTheDocument();
   expect(img).toBeInTheDocument();
+  expect(link).toBeInTheDocument();
 });

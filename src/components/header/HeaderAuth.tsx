@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import PrivateNavigation from "../navigation/PrivateNavigation";
 
 const HeaderAuth: React.FunctionComponent = () => {
-  const isAuthenticated = useSelector((state: any) => state.authReducer.isAuthenticated);
+  const { isAuthenticated } = useSelector((state: any) => state.authReducer);
   return (
     <div className="header__auth">
       {isAuthenticated ? (

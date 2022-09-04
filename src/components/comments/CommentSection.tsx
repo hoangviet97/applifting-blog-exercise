@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Comment, Avatar } from "antd";
+import { Comment, Avatar, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import CommentEditor from "./CommentEditor";
 import CommentList from "./CommentList";
@@ -10,11 +10,12 @@ import { AppDispatch } from "../../redux/store";
 const CommentSection: React.FunctionComponent = () => {
   const params: any = useParams();
   const dispatch: AppDispatch = useDispatch();
-  const user = useSelector((state: any) => state.authReducer.user);
-  const comments = useSelector((state: any) => state.articleReducer.articleComments);
-  const isCommentLoading = useSelector((state: any) => state.articleReducer.commentLoading);
 
-  const [value, setValue] = useState("");
+  // Selectors
+  const { user } = useSelector((state: any) => state.authReducer);
+  const { comments, isLoading } = useSelector((state: any) => state.articleReducer);
+
+  const [value, setValue] = useState<string>("");
 
   const handleSubmit = () => {
     const data = {
@@ -22,7 +23,7 @@ const CommentSection: React.FunctionComponent = () => {
       author: user,
       content: value
     };
-    dispatch(addComment(data));
+    value.length < 1 ? message.error("Comment cannot be empty!") : dispatch(addComment(data));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,7 +41,7 @@ const CommentSection: React.FunctionComponent = () => {
             {user[0]}
           </Avatar>
         }
-        content={<CommentEditor onChange={handleChange} onSubmit={handleSubmit} value={value} />}
+        content={<CommentEditor onChange={handleChange} loading={isLoading} onSubmit={handleSubmit} value={value} />}
       />
       <CommentList />
     </div>

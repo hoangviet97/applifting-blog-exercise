@@ -8,7 +8,7 @@ import { AppDispatch } from "../../redux/store";
 
 const PrivateNavigation: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
-  const user = useSelector((state: any) => state.authReducer.user);
+  const { user } = useSelector((state: any) => state.authReducer);
 
   const logoutHandle = () => {
     dispatch(logout());
@@ -29,9 +29,7 @@ const PrivateNavigation: React.FunctionComponent = () => {
           <Link to="/my-articles" className="nav__link">
             My Articles
           </Link>
-          <Link to="/new-article" className="nav__link">
-            Create Article
-          </Link>
+          <Link to="/new-article">Create Article</Link>
         </div>
       </div>
       <div className="nav__profile">

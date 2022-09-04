@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { comment } from "../../types/types";
 
 const CommentList: React.FunctionComponent = () => {
-  const comments = useSelector((state: any) => state.articleReducer.articleComments);
+  const { comments } = useSelector((state: any) => state.articleReducer);
 
   return <div>{comments && comments.map((comment: comment, index: number) => <CommentItem key={index} item={comment} />)}</div>;
 };

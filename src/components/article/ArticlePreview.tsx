@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import ArticlePreviewSkeleton from "../Skeletons/ArticlePreviewSkeleton";
 import { article } from "../../types/types";
+import ArticleSecondaryInfo from "./ArticleSecondaryInfo";
 
 interface Props {
   article: article;
@@ -34,12 +35,9 @@ const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {
       {isLoading ? <ArticlePreviewSkeleton /> : <img className="article-preview__image" src={img} alt="Article preview image" />}
       <div className="article-preview__content">
         <h2>{article.title}</h2>
-        <div className="article-preview__info">
-          <div className="article-detail__author">{user}</div>
-          <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
-        </div>
+        <ArticleSecondaryInfo user={user} createdAt={article.createdAt} />
         <div>{article.perex}</div>
-        <div className="article-preview__link">
+        <div className="article-preview__link" data-testid="article-link">
           <Link to={`${article.articleId}`}>Read whole article</Link>
         </div>
       </div>
