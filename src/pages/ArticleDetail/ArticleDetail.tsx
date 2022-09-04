@@ -5,7 +5,6 @@ import { getArticle, getArticles } from "../../redux/actions/articleActions";
 import { Skeleton } from "antd";
 import axiosClient from "../../helpers/axios";
 import ReactMarkdown from "react-markdown";
-import Markdown from "markdown-to-jsx";
 import ArticleImageSkeleton from "../../components/Skeletons/ArticleImageSkeleton";
 import CommentSection from "../../components/comments/CommentSection";
 import { article } from "../../types/types";

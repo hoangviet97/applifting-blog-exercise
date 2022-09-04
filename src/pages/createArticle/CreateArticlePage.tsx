@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Form, Input, message, Upload } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { createArticle } from "../../redux/actions/articleActions";
-import Markdown from "markdown-to-jsx";
 import { AppDispatch } from "../../redux/store";
 
 const CreateArticlePage: React.FunctionComponent = () => {
@@ -67,7 +66,6 @@ const CreateArticlePage: React.FunctionComponent = () => {
             <TextArea autoSize={{ minRows: 15, maxRows: 25 }} onChange={(e) => setContent(e.target.value)} autoComplete="false" placeholder="Supports markdown. Yay!" />
           </Form.Item>
         </Form>
-        <Markdown>{content}</Markdown>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button, Form, Input, message, Upload } from "antd";
-import Markdown from "markdown-to-jsx";
 import axiosClient from "../../helpers/axios";
 import { getArticle, createArticle, updateArticleWithoutImage, updateArticleWithImage } from "../../redux/actions/articleActions";
 import _ from "lodash";

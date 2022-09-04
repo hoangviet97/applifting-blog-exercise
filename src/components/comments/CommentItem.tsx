@@ -24,19 +24,17 @@ const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt,
 
   const actions = [
     <Tooltip key="comment-score" title="Score">
-      <div>
-        <span className="comment-action" data-testid="comment-score">
-          {score}
-        </span>
-      </div>
+      <span className="comment__score" data-testid="comment-score">
+        {score}
+      </span>
     </Tooltip>,
     <Tooltip key="comment-basic-like" title="Like">
-      <span onClick={like}>
+      <span className="comment__vote" onClick={like}>
         <UpOutlined />
       </span>
     </Tooltip>,
     <Tooltip key="comment-basic-dislike" title="Dislike">
-      <span onClick={dislike}>
+      <span className="comment__vote" onClick={dislike}>
         <DownOutlined />
       </span>
     </Tooltip>
