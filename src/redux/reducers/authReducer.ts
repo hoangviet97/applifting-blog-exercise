@@ -1,4 +1,12 @@
 import { LOGIN, LOGOUT, LOAD_USER, USER_LOADING } from "../actions/types";
+import {} from "../../types/types";
+
+interface authState {
+  token: string | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  user: string;
+}
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -7,7 +15,7 @@ const initialState = {
   user: ""
 };
 
-function authReducer(state = initialState, action: any) {
+function authReducer(state: authState = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {

@@ -1,5 +1,13 @@
 import { CREATE_ARTICLE, GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, ADD_COMMENT, COMMENT_LOADING, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, SET_UP_VOTE, SET_DOWN_VOTE, RESET_ARTICLES } from "../actions/types";
-import { article, comment } from "../../types/types";
+import { article, articleDetail, comment } from "../../types/types";
+
+interface articleState {
+  articles: article[];
+  article: articleDetail | {};
+  articlesLoading: boolean;
+  commentLoading: boolean;
+  articleComments: comment[];
+}
 
 const initialState = {
   articles: [],
@@ -9,7 +17,7 @@ const initialState = {
   articleComments: []
 };
 
-function articleReducer(state = initialState, action: any) {
+function articleReducer(state: articleState = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {

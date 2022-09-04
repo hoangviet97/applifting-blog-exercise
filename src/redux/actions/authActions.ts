@@ -9,7 +9,6 @@ export const login = (username: string, password: string, navigate: NavigateFunc
     const res = await axiosClient.post("/login", { username, password });
     dispatch({ type: LOGIN, payload: res.data.access_token });
     navigate("/articles");
-    console.log(res);
   } catch (error: any) {
     message.error(error.response.data.message);
     dispatch({ type: LOGIN_FAIL });
@@ -21,10 +20,7 @@ export const loadUser = () => async (dispatch: Dispatch) => {
     dispatch(loading());
     const res = await axiosClient.get(`/tenants/38ab5ddd-a9dc-454f-b62c-9fac7f223edc`);
     dispatch({ type: LOAD_USER, payload: res.data });
-
-    console.log(res);
   } catch (error: any) {
-    console.log(error);
     message.error(error.response.data.message);
     dispatch({ type: LOGIN_FAIL });
   }

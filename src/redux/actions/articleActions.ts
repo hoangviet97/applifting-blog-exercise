@@ -73,7 +73,6 @@ export const getArticle = (id: string) => async (dispatch: Dispatch) => {
     dispatch(articleLoading());
     const res = await axiosClient.get(`/articles/${id}`);
     dispatch({ type: GET_ARTICLE, payload: res.data });
-    console.log(res);
   } catch (error: any) {
     message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });
@@ -117,10 +116,8 @@ export const addComment = (data: any) => async (dispatch: Dispatch) => {
 export const setUpVote = (id: string) => async (dispatch: Dispatch) => {
   try {
     const res = await axiosClient.post(`/comments/${id}/vote/up`);
-    console.log(res.data);
     dispatch({ type: SET_UP_VOTE, payload: { id: id, data: res.data } });
   } catch (error: any) {
-    console.log(error);
     message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });
   }
@@ -129,26 +126,9 @@ export const setUpVote = (id: string) => async (dispatch: Dispatch) => {
 export const setDownVote = (id: string) => async (dispatch: Dispatch) => {
   try {
     const res = await axiosClient.post(`/comments/${id}/vote/down`);
-    console.log(res.data);
     dispatch({ type: SET_DOWN_VOTE, payload: { id: id, data: res.data } });
   } catch (error: any) {
-    console.log(error);
     message.error(error.response.data.message);
-    dispatch({ type: GET_ARTICLES_FAIL });
-  }
-};
-
-export const uploadArticleImage = (formdata: any) => async (dispatch: Dispatch) => {
-  const config = {
-    headers: {
-      "content-type": "multipart/form-data"
-    }
-  };
-
-  try {
-    const res = await axiosClient.post("/images", formdata, config);
-    dispatch({ type: UPLOAD_IMAGE, payload: res.data[0].imageId });
-  } catch (error: any) {
     dispatch({ type: GET_ARTICLES_FAIL });
   }
 };
