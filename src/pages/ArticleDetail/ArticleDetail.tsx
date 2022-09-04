@@ -19,7 +19,7 @@ const ArticleDetail: React.FunctionComponent = () => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
   const user = useSelector((state: any) => state.authReducer.user);
-  const { article, articles, isLoading } = useSelector((state: any) => state.articleReducer);
+  const { article, articles, articlesLoading } = useSelector((state: any) => state.articleReducer);
 
   const getImage = async (id: string) => {
     setImgLoading(true);
@@ -44,7 +44,7 @@ const ArticleDetail: React.FunctionComponent = () => {
 
   return (
     <div className="article-detail container container__content">
-      {isLoading ? (
+      {articlesLoading ? (
         <Skeleton paragraph={{ rows: 10 }} />
       ) : (
         <div className="article-detail__content left-area">

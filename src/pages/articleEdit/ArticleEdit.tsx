@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Button, Form, Input, Tabs, message, Upload } from "antd";
+import { Button, Form, Input, message, Upload } from "antd";
 import Markdown from "markdown-to-jsx";
 import axiosClient from "../../helpers/axios";
 import { getArticle, createArticle, updateArticleWithoutImage, updateArticleWithImage } from "../../redux/actions/articleActions";
-import { loading } from "../../redux/actions/authActions";
 import _ from "lodash";
 import { AppDispatch } from "../../redux/store";
 
@@ -20,7 +19,7 @@ const ArticleEdit: React.FunctionComponent = () => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [isModified, setIsModified] = useState<boolean>(false);
 
-  const { article, isLoading } = useSelector((state: any) => state.articleReducer);
+  const { article, articlesLoading } = useSelector((state: any) => state.articleReducer);
 
   const getImage = async (id: string) => {
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
@@ -77,8 +76,8 @@ const ArticleEdit: React.FunctionComponent = () => {
             <Form.Item>
               <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
                 <h1>Edit article</h1>
-                <Button type="primary" disabled={isLoading} htmlType="submit">
-                  {isLoading ? "Please wait..." : "Publish Article"}
+                <Button type="primary" disabled={articlesLoading} htmlType="submit">
+                  {articlesLoading ? "Please wait..." : "Publish Article"}
                 </Button>
               </div>
             </Form.Item>

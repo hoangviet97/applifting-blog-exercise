@@ -13,7 +13,7 @@ const CommentSection: React.FunctionComponent = () => {
 
   // Selectors
   const { user } = useSelector((state: any) => state.authReducer);
-  const { comments, isLoading } = useSelector((state: any) => state.articleReducer);
+  const { articleComments, commentLoading } = useSelector((state: any) => state.articleReducer);
 
   const [value, setValue] = useState<string>("");
 
@@ -33,7 +33,7 @@ const CommentSection: React.FunctionComponent = () => {
   return (
     <div>
       <div>
-        <span data-testid="comments-num">Comments ({comments.length})</span>
+        <span data-testid="comments-num">Comments ({articleComments.length})</span>
       </div>
       <Comment
         avatar={
@@ -41,7 +41,7 @@ const CommentSection: React.FunctionComponent = () => {
             {user[0]}
           </Avatar>
         }
-        content={<CommentEditor onChange={handleChange} loading={isLoading} onSubmit={handleSubmit} value={value} />}
+        content={<CommentEditor onChange={handleChange} loading={commentLoading} onSubmit={handleSubmit} value={value} />}
       />
       <CommentList />
     </div>
