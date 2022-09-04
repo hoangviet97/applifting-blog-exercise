@@ -12,6 +12,7 @@ const CommentSection: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: any) => state.authReducer.user);
   const comments = useSelector((state: any) => state.articleReducer.articleComments);
+  const isCommentLoading = useSelector((state: any) => state.articleReducer.commentLoading);
 
   const [value, setValue] = useState("");
 

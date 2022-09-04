@@ -1,11 +1,11 @@
-import { GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, ADD_COMMENT, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, SET_UP_VOTE, SET_DOWN_VOTE } from "../actions/types";
+import { CREATE_ARTICLE, GET_ARTICLE, DELETE_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, ADD_COMMENT, COMMENT_LOADING, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, SET_UP_VOTE, SET_DOWN_VOTE } from "../actions/types";
 import { article, comment } from "../../types/types";
 
 const initialState = {
   articles: [],
   article: {},
-  images: [],
   articlesLoading: false,
+  commentLoading: false,
   articleComments: []
 };
 
@@ -13,6 +13,11 @@ function articleReducer(state = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {
+    case CREATE_ARTICLE:
+      return {
+        ...state,
+        loading: false
+      };
     case GET_ARTICLES:
       return {
         ...state,
@@ -39,6 +44,7 @@ function articleReducer(state = initialState, action: any) {
     case ADD_COMMENT:
       return {
         ...state,
+        commentLoading: false,
         articleComments: [payload, ...state.articleComments]
       };
     case SET_UP_VOTE:
@@ -55,6 +61,11 @@ function articleReducer(state = initialState, action: any) {
       return {
         ...state,
         loading: false
+      };
+    case COMMENT_LOADING:
+      return {
+        ...state,
+        commentLoading: true
       };
     case ARTICLE_LOADING:
       return {

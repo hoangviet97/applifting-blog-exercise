@@ -17,7 +17,6 @@ const MyArticles: React.FunctionComponent = () => {
   const searchInput = useRef<InputRef>(null);
 
   // States
-  const [editedArticles, setEditedArticles] = useState<DataType[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [searchedColumn, setSearchedColumn] = useState<string>("");
 
@@ -25,23 +24,11 @@ const MyArticles: React.FunctionComponent = () => {
   const user = useSelector((state: any) => state.authReducer.user);
   const articles = useSelector((state: any) => state.articleReducer.articles);
 
-  interface DataType {
-    key: string;
-    title: string;
-    perex: string;
-    author: string;
-  }
-
   type DataIndex = keyof DataType;
 
   useEffect(() => {
     dispatch(getArticles());
   }, []);
-
-  useEffect(() => {
-    const ogArticles = articles.map((article: article) => ({ ...article, comments: 2 }));
-    setEditedArticles(ogArticles);
-  }, [articles]);
 
   const onDeleteArticleHandle = (id: string) => {
     dispatch(deleteArticle(id));
@@ -125,10 +112,6 @@ const MyArticles: React.FunctionComponent = () => {
       render: () => <span>{user}</span>
     },
     {
-      title: "# of comments",
-      dataIndex: "comments"
-    },
-    {
       title: "Actions",
       dataIndex: "",
       render: (_, record) => (
@@ -153,7 +136,7 @@ const MyArticles: React.FunctionComponent = () => {
         </Button>
       </header>
       <div className="article-personal">
-        <Table columns={columns} dataSource={editedArticles} />
+        <Table columns={columns} dataSource={articles} />
       </div>
     </div>
   );

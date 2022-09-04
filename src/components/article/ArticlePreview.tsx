@@ -39,7 +39,9 @@ const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {
           <div className="article-detail__date">{moment(article.createdAt).locale("cs").format("L")}</div>
         </div>
         <div>{article.perex}</div>
-        <Link to={`${article.articleId}`}>Read whole article</Link>
+        <div className="article-preview__link">
+          <Link to={`${article.articleId}`}>Read whole article</Link>
+        </div>
       </div>
     </div>
   );

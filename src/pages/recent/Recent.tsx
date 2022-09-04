@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticles } from "../../redux/actions/articleActions";
 import ArticlePreview from "../../components/article/ArticlePreview";
-import { Skeleton } from "antd";
+import FullPageLoader from "../../components/Skeletons/FullPageLoader";
 import { article } from "../../types/types";
 import { AppDispatch } from "../../redux/store";
 
@@ -18,7 +18,7 @@ const Recent: React.FunctionComponent = () => {
   return (
     <div className="recent-articles container container__content">
       <h1>Recent Articles</h1>
-      <div className="recent-articles__list">{loading ? <Skeleton /> : articles.slice(0, 5).map((article: article, index: number) => <ArticlePreview key={index} article={article} />)}</div>
+      <div className="article__list">{loading ? <div>Loading...</div> : articles.slice(0, 5).map((article: article, index: number) => <ArticlePreview key={index} article={article} />)}</div>
     </div>
   );
 };

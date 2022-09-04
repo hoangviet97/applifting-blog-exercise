@@ -12,6 +12,8 @@ const CreateArticlePage: React.FunctionComponent = () => {
   const [check, setCheck] = useState<any>();
   const [img, setImg] = useState<string>("");
 
+  const isLoading = useSelector((state: any) => state.articleReducer.loading);
+
   const { TextArea } = Input;
 
   const onSubmitFormHandle = (values: any) => {
@@ -44,8 +46,8 @@ const CreateArticlePage: React.FunctionComponent = () => {
           <Form.Item>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <h1>Create new article</h1>
-              <Button type="primary" htmlType="submit">
-                Publish Article
+              <Button type="primary" disabled={isLoading} htmlType="submit">
+                {isLoading ? "Please wait..." : "Publish Article"}
               </Button>
             </div>
           </Form.Item>

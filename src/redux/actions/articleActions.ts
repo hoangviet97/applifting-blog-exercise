@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosClient from "../../helpers/axios";
-import { GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, ADD_COMMENT, SET_UP_VOTE, SET_DOWN_VOTE, DELETE_ARTICLE } from "./types";
+import { CREATE_ARTICLE, GET_ARTICLE, GET_ARTICLES, GET_ARTICLES_FAIL, UPLOAD_IMAGE, ARTICLE_LOADING, COMMENT_LOADING, ARTICLES_LOADING, EDIT_ARTICLE, ADD_COMMENT, SET_UP_VOTE, SET_DOWN_VOTE, DELETE_ARTICLE } from "./types";
 import { message } from "antd";
 
 export const createArticle = (data: any, image: any) => async (dispatch: Dispatch) => {
@@ -11,14 +11,15 @@ export const createArticle = (data: any, image: any) => async (dispatch: Dispatc
   };
 
   try {
+    dispatch(articleLoading());
     const imageRes = await axiosClient.post("/images", image, config);
     Object.assign(data, { imageId: imageRes.data[0].imageId });
-    console.log(imageRes.data);
     const res = await axiosClient.post("/articles", data);
+    dispatch({ type: CREATE_ARTICLE });
     message.success("New message successfuly created!");
   } catch (error: any) {
     console.log(error.response.data);
-    message.error(error.response.data.message);
+    //message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });
   }
 };
@@ -32,10 +33,11 @@ export const updateArticleWithImage = (article: string, data: any, ogImage: stri
 
   try {
     // post new image
-    console.log(ogImage);
+    dispatch(articleLoading());
     const imageRes = await axiosClient.post("/images", image, config);
     Object.assign(data, { imageId: imageRes.data[0].imageId });
     const res = await axiosClient.patch(`/articles/${article}`, data);
+    dispatch({ type: CREATE_ARTICLE });
     message.success("Article was successfuly edited!");
   } catch (error: any) {
     dispatch({ type: GET_ARTICLES_FAIL });
@@ -44,7 +46,9 @@ export const updateArticleWithImage = (article: string, data: any, ogImage: stri
 
 export const updateArticleWithoutImage = (id: string, data: any) => async (dispatch: Dispatch) => {
   try {
+    dispatch(articleLoading());
     const res = await axiosClient.patch(`/articles/${id}`, data);
+    dispatch({ type: CREATE_ARTICLE });
     message.success("Article was successfuly edited!");
   } catch (error: any) {
     console.log(error.response.data);
@@ -100,12 +104,11 @@ export const editArticle = (id: string, data: any) => async (dispatch: Dispatch)
 
 export const addComment = (data: any) => async (dispatch: Dispatch) => {
   try {
+    dispatch(commentLoading());
     const res = await axiosClient.post(`/comments`, data);
-    console.log(res.data);
     dispatch({ type: ADD_COMMENT, payload: res.data });
     message.success("Comment created");
   } catch (error: any) {
-    console.log(error);
     message.error(error.response.data.message);
     dispatch({ type: GET_ARTICLES_FAIL });
   }
@@ -148,6 +151,12 @@ export const uploadArticleImage = (formdata: any) => async (dispatch: Dispatch) 
   } catch (error: any) {
     dispatch({ type: GET_ARTICLES_FAIL });
   }
+};
+
+export const commentLoading = () => {
+  return {
+    type: COMMENT_LOADING
+  };
 };
 
 export const articlesLoading = () => {

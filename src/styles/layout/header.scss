@@ -1,6 +1,10 @@
 .header {
   background-color: $header-grey;
 
+  @media screen and (max-width: 1090px) {
+    padding: 0 20px;
+  }
+
   &__auth {
     display: flex;
     align-items: center;

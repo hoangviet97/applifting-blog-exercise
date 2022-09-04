@@ -21,6 +21,7 @@ const ArticleEdit: React.FunctionComponent = () => {
   const [isModified, setIsModified] = useState<boolean>(false);
 
   const article = useSelector((state: any) => state.articleReducer.article);
+  const isLoading = useSelector((state: any) => state.articleReducer.loading);
 
   const getImage = async (id: string) => {
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
@@ -72,15 +73,15 @@ const ArticleEdit: React.FunctionComponent = () => {
   return (
     <div>
       <div className="article-operation container container__content">
-        <header>
-          <h1>Edit article</h1>
-        </header>
         <div className="article-operation__body">
           <Form form={form} onFinish={onSubmitFormHandle} layout="vertical">
             <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Edit Article
-              </Button>
+              <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                <h1>Edit article</h1>
+                <Button type="primary" disabled={isLoading} htmlType="submit">
+                  {isLoading ? "Please wait..." : "Publish Article"}
+                </Button>
+              </div>
             </Form.Item>
             <Form.Item label="Article Title" name="title" rules={[{ required: true, message: "Please input title!" }]}>
               <Input />
