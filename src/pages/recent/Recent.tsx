@@ -8,7 +8,7 @@ import { article } from "../../types/types";
 import { AppDispatch } from "../../redux/store";
 
 const Recent: React.FunctionComponent = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: any = useDispatch();
   const articles = useSelector((state: any) => state.articleReducer.articles);
   const loading = useSelector((state: any) => state.articleReducer.articlesLoading);
 

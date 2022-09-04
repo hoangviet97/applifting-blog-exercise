@@ -6,7 +6,7 @@ import { useNavigate, NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../../redux/store";
 
 const Login: React.FunctionComponent = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: any = useDispatch();
   const isAuthenticated = useSelector((state: any) => state.authReducer.isAuthenticated);
   const navigate: NavigateFunction = useNavigate();
 
