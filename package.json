@@ -2,9 +2,10 @@
   "name": "applifting-exercise-viet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
-    "start": "webpack serve --config webpack/webpack.config.js --open",
+    "start": "webpack serve --mode development --config webpack.config.js --open",
+    "build": "webpack",
     "test": "jest",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\""
   },

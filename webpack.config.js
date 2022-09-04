@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "..", "./src/index.tsx"),
+  entry: path.resolve(__dirname, "./src/index.tsx"),
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx"]
   },
@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.(sass|less|css)$/,
-        loaders: ["style-loader", "css-loader", "less-loader"]
+        use: ["style-loader", "css-loader", "less-loader"]
       },
       {
         test: /\.scss$/,
@@ -38,10 +38,10 @@ module.exports = {
   },
   mode: "development",
   output: {
-    path: path.resolve(__dirname, "..", "./build"),
+    path: path.resolve(__dirname, "./build"),
     filename: "bundle.js"
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, "..", "./src/index.html") }), new ReactRefreshWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, "./src/index.html") }), new ReactRefreshWebpackPlugin()],
   devServer: {
     historyApiFallback: true,
     hot: true,
