@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticles } from "../../redux/actions/articleActions";
 import ArticlePreview from "../../components/article/ArticlePreview";
-import moment from "moment";
 import { Skeleton } from "antd";
 import { article } from "../../types/types";
 import { AppDispatch } from "../../redux/store";

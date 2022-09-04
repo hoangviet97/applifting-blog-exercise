@@ -13,7 +13,6 @@ const CommentSection: React.FunctionComponent = () => {
   const user = useSelector((state: any) => state.authReducer.user);
   const comments = useSelector((state: any) => state.articleReducer.articleComments);
 
-  const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
 
   const handleSubmit = () => {
@@ -23,7 +22,6 @@ const CommentSection: React.FunctionComponent = () => {
       content: value
     };
     dispatch(addComment(data));
-    console.log(params.articleId);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,14 +30,16 @@ const CommentSection: React.FunctionComponent = () => {
 
   return (
     <div>
-      <div>Comments ({comments.length})</div>
+      <div>
+        <span data-testid="comments-num">Comments ({comments.length})</span>
+      </div>
       <Comment
         avatar={
-          <Avatar shape="circle" style={{ backgroundColor: "#87d068" }} alt="Han Solo">
+          <Avatar shape="circle" style={{ backgroundColor: "#87d068" }}>
             {user[0]}
           </Avatar>
         }
-        content={<CommentEditor onChange={handleChange} onSubmit={handleSubmit} submitting={submitting} value={value} />}
+        content={<CommentEditor onChange={handleChange} onSubmit={handleSubmit} value={value} />}
       />
       <CommentList />
     </div>

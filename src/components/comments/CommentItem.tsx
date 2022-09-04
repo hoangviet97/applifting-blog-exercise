@@ -25,7 +25,9 @@ const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt,
   const actions = [
     <Tooltip key="comment-score" title="Score">
       <div>
-        <span className="comment-action">{score}</span>
+        <span className="comment-action" data-testid="comment-score">
+          {score}
+        </span>
       </div>
     </Tooltip>,
     <Tooltip key="comment-basic-like" title="Like">
@@ -40,7 +42,7 @@ const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt,
     </Tooltip>
   ];
 
-  return <Comment actions={actions} author={<a>{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p>{content}</p>} datetime={<span>{moment(createdAt).locale("cs").fromNow()}</span>} />;
+  return <Comment data-testid="comment" actions={actions} author={<a data-testid="comment-author">{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p data-testid="comment-content">{content}</p>} datetime={<span>{moment(createdAt).locale("cs").fromNow()}</span>} />;
 };
 
 export default CommentItem;

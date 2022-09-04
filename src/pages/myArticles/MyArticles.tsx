@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Table, Space, Input, InputRef } from "antd";
 import { getArticles, deleteArticle } from "../../redux/actions/articleActions";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import type { ColumnsType, TableProps } from "antd/es/table";
+import type { ColumnsType } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { article } from "../../types/types";
 import { AppDispatch } from "../../redux/store";
@@ -14,12 +14,14 @@ import Highlighter from "react-highlight-words";
 
 const MyArticles: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [editedArticles, setEditedArticles] = useState<DataType[]>([]);
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
 
-  // selectors
+  // States
+  const [editedArticles, setEditedArticles] = useState<DataType[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [searchedColumn, setSearchedColumn] = useState<string>("");
+
+  // Selectors
   const user = useSelector((state: any) => state.authReducer.user);
   const articles = useSelector((state: any) => state.articleReducer.articles);
 

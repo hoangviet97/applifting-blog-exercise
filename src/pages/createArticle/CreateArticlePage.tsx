@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Tabs, message, Upload } from "antd";
+import { Button, Form, Input, message, Upload } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadArticleImage, createArticle } from "../../redux/actions/articleActions";
-import ReactMarkdown from "react-markdown";
+import { createArticle } from "../../redux/actions/articleActions";
 import Markdown from "markdown-to-jsx";
 import { AppDispatch } from "../../redux/store";
 

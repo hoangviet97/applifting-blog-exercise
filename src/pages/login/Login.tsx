@@ -26,7 +26,7 @@ const Login: React.FunctionComponent = () => {
       <div className="login-form__window" style={{ backgroundColor: "white" }}>
         <div className="login-form__content">
           <h1>Log In</h1>
-          <Form className="login-form" name="basic" initialValues={{ remember: true }} layout="vertical" onFinish={onFinishHandler} autoComplete="off">
+          <Form className="login-form" name="basic" aria-label="form" data-testid="form" initialValues={{ remember: true }} layout="vertical" onFinish={onFinishHandler} autoComplete="off">
             <Form.Item label="Username" name="username" rules={[{ required: true, message: "Please input your username!" }]}>
               <Input className="login-form__input" />
             </Form.Item>
