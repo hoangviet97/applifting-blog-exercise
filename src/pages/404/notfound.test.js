@@ -6,6 +6,6 @@ import "@testing-library/jest-dom";
 
 it("Should be visible", () => {
   render(<NotFound />);
-  const el = screen.getByRole("textbox");
+  const el = screen.getByRole("heading");
   expect(el).toBeInTheDocument();
 });

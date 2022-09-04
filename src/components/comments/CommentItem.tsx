@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import { FC } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { Tooltip, Comment, Avatar } from "antd";
@@ -13,7 +13,6 @@ interface Props {
 
 const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt, score } }) => {
   const dispatch: AppDispatch = useDispatch();
-  const [action, setAction] = useState<string | null>(null);
 
   const like = () => {
     dispatch(setUpVote(commentId));
