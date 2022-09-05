@@ -13,13 +13,16 @@ const ArticleEdit: React.FunctionComponent = () => {
   const { TextArea } = Input;
   const [form] = Form.useForm();
 
+  // States
   const [img, setImg] = useState<string>("");
   const [newImage, setNewImage] = useState<any>();
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [isModified, setIsModified] = useState<boolean>(false);
 
+  // Selectors
   const { article, articlesLoading } = useSelector((state: any) => state.articleReducer);
 
+  // Download image from api by imageId value
   const getImage = async (id: string) => {
     const res = await axiosClient.get(`/images/${id}`, { responseType: "blob" });
     const dat = URL.createObjectURL(res.data);
@@ -34,6 +37,7 @@ const ArticleEdit: React.FunctionComponent = () => {
 
   useEffect(() => {
     article.imageId !== undefined && getImage(article.imageId);
+    // Set default values to form
     form.setFieldsValue({ title: article.title, perex: article.perex, content: article.content });
   }, [article]);
 
@@ -41,6 +45,7 @@ const ArticleEdit: React.FunctionComponent = () => {
     const ogArticle = { title: article.title, perex: article.perex, content: article.content };
 
     if (img.length > 0) {
+      // Compare previous state with current state
       if (_.isEqual(values, ogArticle) && !isModified) {
         message.info("Nothing to update!");
       } else {
@@ -54,6 +59,7 @@ const ArticleEdit: React.FunctionComponent = () => {
   };
 
   const onUploadImage = (e: any) => {
+    // Image was updated or removed
     setIsModified(true);
 
     if (e.fileList.length > 0) {

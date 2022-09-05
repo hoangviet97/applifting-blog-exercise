@@ -7,10 +7,13 @@ import { AppDispatch } from "../../redux/store";
 
 const Login: React.FunctionComponent = () => {
   const dispatch: any = useDispatch();
-  const { isAuthenticated } = useSelector((state: any) => state.authReducer);
   const navigate: NavigateFunction = useNavigate();
 
+  // Selectors
+  const { isAuthenticated } = useSelector((state: any) => state.authReducer);
+
   useEffect(() => {
+    // Condition for auto redirect if isAuthenticated state = true
     if (isAuthenticated) {
       navigate("articles");
     }

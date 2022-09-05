@@ -11,9 +11,11 @@ const Recent: React.FunctionComponent = () => {
   const { articles, articlesLoading } = useSelector((state: any) => state.articleReducer);
 
   useEffect(() => {
+    // Get all articles
     dispatch(getArticles());
 
     return () => {
+      // Reset articles state in redux store when unmount
       dispatch(resetArticles());
     };
   }, []);
@@ -25,10 +27,7 @@ const Recent: React.FunctionComponent = () => {
         {articlesLoading ? (
           <div>Loading...</div>
         ) : (
-          articles
-            .sort((a: any, b: any) => a.createdAt - b.createdAt)
-            .slice(0, 5)
-            .map((article: article, index: number) => <ArticlePreview key={index} article={article} />)
+          articles.slice(0, 5).map((article: article, index: number) => <ArticlePreview key={index} article={article} />)
         )}
       </div>
     </div>

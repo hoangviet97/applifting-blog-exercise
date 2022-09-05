@@ -11,11 +11,12 @@ const CommentSection: React.FunctionComponent = () => {
   const params: any = useParams();
   const dispatch: AppDispatch = useDispatch();
 
+  // States
+  const [value, setValue] = useState<string>("");
+
   // Selectors
   const { user } = useSelector((state: any) => state.authReducer);
   const { articleComments, commentLoading } = useSelector((state: any) => state.articleReducer);
-
-  const [value, setValue] = useState<string>("");
 
   const handleSubmit = () => {
     const data = {
@@ -23,6 +24,7 @@ const CommentSection: React.FunctionComponent = () => {
       author: user,
       content: value
     };
+    // Check if comment value isn't empty
     value.length < 1 ? message.error("Comment cannot be empty!") : dispatch(addComment(data));
   };
 

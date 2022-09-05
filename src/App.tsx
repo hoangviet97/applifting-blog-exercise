@@ -17,6 +17,7 @@ import ProtectedRoute from "./routing/ProtectedRoute";
 
 const App = () => {
   useEffect(() => {
+    // If token exists on client get user info and set auth token to axios header
     if (localStorage.getItem("token")) {
       setAuthToken(localStorage.token);
       store.dispatch(loadUser());

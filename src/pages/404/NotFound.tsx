@@ -2,7 +2,7 @@ import React from "react";
 
 const NotFound: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="not-found">
       <h1>Content not found</h1>
     </div>
   );

@@ -14,9 +14,12 @@ import ArticleSecondaryInfo from "../../components/article/ArticleSecondaryInfo"
 const ArticleDetail: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const params: any = useParams();
+
+  // States
   const [img, setImg] = useState<string>("");
   const [imgLoading, setImgLoading] = useState<boolean>(false);
 
+  // Selectors
   const user = useSelector((state: any) => state.authReducer.user);
   const { article, articles, articlesLoading } = useSelector((state: any) => state.articleReducer);
 
@@ -33,6 +36,7 @@ const ArticleDetail: React.FunctionComponent = () => {
     dispatch(getArticles());
 
     return () => {
+      // Reset image state on unmount
       setImg("");
     };
   }, []);

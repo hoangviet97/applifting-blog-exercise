@@ -40,7 +40,7 @@ const CommentItem: FC<Props> = ({ item: { commentId, author, content, createdAt,
     </Tooltip>
   ];
 
-  return <Comment data-testid="comment" actions={actions} author={<a data-testid="comment-author">{author}</a>} avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />} content={<p data-testid="comment-content">{content}</p>} datetime={<span>{moment(createdAt).locale("cs").fromNow()}</span>} />;
+  return <Comment data-testid="comment" actions={actions} author={<a data-testid="comment-author">{author}</a>} avatar={<Avatar style={{ backgroundColor: "#87d068" }}>{author[0]}</Avatar>} content={<p data-testid="comment-content">{content}</p>} datetime={<span>{moment(createdAt).locale("cs").fromNow()}</span>} />;
 };
 
 export default CommentItem;

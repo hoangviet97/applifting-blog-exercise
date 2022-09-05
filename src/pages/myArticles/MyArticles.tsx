@@ -12,6 +12,15 @@ import { AppDispatch } from "../../redux/store";
 import { ColumnType } from "antd/lib/table/interface";
 import Highlighter from "react-highlight-words";
 
+interface DataType {
+  key: string;
+  articleId: string;
+  title: string;
+  perex: string;
+  author: string;
+  comments: number;
+}
+
 const MyArticles: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const searchInput = useRef<InputRef>(null);
@@ -26,6 +35,7 @@ const MyArticles: React.FunctionComponent = () => {
   const { articles } = useSelector((state: any) => state.articleReducer);
 
   useEffect(() => {
+    // Get all articles
     dispatch(getArticles());
   }, []);
 
@@ -83,15 +93,7 @@ const MyArticles: React.FunctionComponent = () => {
     render: (text) => (searchedColumn === dataIndex ? <Highlighter highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }} searchWords={[searchText]} autoEscape textToHighlight={text ? text.toString() : ""} /> : text)
   });
 
-  interface DataType {
-    key: string;
-    articleId: string;
-    title: string;
-    perex: string;
-    author: string;
-    comments: number;
-  }
-
+  // Table columns description
   const columns: ColumnsType<DataType> = [
     {
       title: "Article title",

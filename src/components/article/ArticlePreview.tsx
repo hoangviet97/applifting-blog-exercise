@@ -13,9 +13,11 @@ interface Props {
 }
 
 const ArticlePreview: React.FunctionComponent<Props> = ({ article }) => {
+  // States
   const [img, setImg] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // Selectors
   const user = useSelector((state: any) => state.authReducer.user);
 
   useEffect(() => {

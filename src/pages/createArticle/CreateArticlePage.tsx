@@ -7,13 +7,14 @@ import { AppDispatch } from "../../redux/store";
 const CreateArticlePage: React.FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
-  const [content, setContent] = useState<string>("");
+  const { TextArea } = Input;
+
+  // States
   const [check, setCheck] = useState<any>();
   const [img, setImg] = useState<string>("");
 
+  // Selectors
   const isLoading = useSelector((state: any) => state.articleReducer.loading);
-
-  const { TextArea } = Input;
 
   const onSubmitFormHandle = (values: any) => {
     const formData = new FormData();
@@ -63,7 +64,7 @@ const CreateArticlePage: React.FunctionComponent = () => {
             <TextArea autoSize={{ minRows: 4, maxRows: 4 }} autoComplete="false" />
           </Form.Item>
           <Form.Item label="Content" name="content" rules={[{ required: true, message: "Please input content!" }]}>
-            <TextArea autoSize={{ minRows: 15, maxRows: 25 }} onChange={(e) => setContent(e.target.value)} autoComplete="false" placeholder="Supports markdown. Yay!" />
+            <TextArea autoSize={{ minRows: 15, maxRows: 25 }} autoComplete="false" placeholder="Supports markdown. Yay!" />
           </Form.Item>
         </Form>
       </div>

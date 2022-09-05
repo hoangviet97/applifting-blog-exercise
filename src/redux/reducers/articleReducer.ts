@@ -51,6 +51,7 @@ function articleReducer(state: articleState = initialState, action: any) {
         articles: state.articles.filter((article: article) => article.articleId !== payload)
       };
     case ADD_COMMENT:
+      // Fix createdAt value by adding 2 hours to previous value
       const fixedComment = payload;
       fixedComment.createdAt = moment(fixedComment.createdAt).add(2, "h");
       return {
